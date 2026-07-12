@@ -400,4 +400,84 @@
         <div class="service-card reveal">
           <div class="icon">📋</div>
           <h3>Formulaires &amp; réservation</h3>
-          <p>Devis, prise de rendez-vou
+          <p>Devis, prise de rendez-vous ou réservation intégrés directement au site, sans outil tiers compliqué à gérer.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon">⭐</div>
+          <h3>Preuve sociale</h3>
+          <p>Avis Google mis en avant, notes et témoignages intégrés pour rassurer un visiteur avant qu'il ne décroche son téléphone.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon">⚙️</div>
+          <h3>Maintenance &amp; mises à jour</h3>
+          <p>Un site vivant&nbsp;: ajout de pages, de photos, d'avis, de nouvelles zones desservies au fil de votre activité.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon">🚀</div>
+          <h3>Mise en ligne accompagnée</h3>
+          <p>Nom de domaine, hébergement, certificat SSL, Google Business Profile&nbsp;: je m'occupe de la mise en ligne de A à Z.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow gradient-text">Méthode</span>
+        <h2>Comment se déroule un projet</h2>
+      </div>
+      <div class="process">
+        <div class="process-step reveal"><span class="num">01</span><h3>Échange</h3><p>On parle de votre métier, votre zone de chalandise et ce qui vous démarque vraiment.</p></div>
+        <div class="process-step reveal"><span class="num">02</span><h3>Maquette</h3><p>Une première version du site, avec vos vraies informations et photos, à valider ensemble.</p></div>
+        <div class="process-step reveal"><span class="num">03</span><h3>Développement</h3><p>SEO, formulaires, données structurées et responsive&nbsp;: tout est branché et testé.</p></div>
+        <div class="process-step reveal"><span class="num">04</span><h3>Mise en ligne</h3><p>Domaine, hébergement et Google Business Profile configurés, le site est publié.</p></div>
+        <div class="process-step reveal"><span class="num">05</span><h3>Suivi</h3><p>Mises à jour, nouvelles pages et ajustements SEO dans la durée.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-box reveal">
+        <span class="eyebrow gradient-text">Discutons de votre projet</span>
+        <h2>Un site vitrine à créer ou à refaire&nbsp;?</h2>
+        <p>Que vous partiez de zéro ou que vous souhaitiez moderniser un site existant, je peux vous montrer concrètement à quoi ressemblerait votre futur site.<br>— Colin Jérôme, fondateur du Bâtisseur du Web</p>
+        <div class="contact-actions">
+          <a href="mailto:colin.jerome2012@gmail.com?subject=Nouveau%20projet%20de%20site%20vitrine" class="btn btn-primary">✉️ colin.jerome2012@gmail.com</a>
+          <a href="#realisations" class="btn btn-outline">Revoir les réalisations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Le Bâtisseur du Web — Colin Jérôme — Création de sites vitrines pour artisans &amp; indépendants.</p>
+    <div class="foot-links">
+      <a href="https://tom-legrand-paysagiste.fr/" target="_blank" rel="noopener">Tom Legrand Jardin &amp; Services</a>
+      <a href="https://jerome-boop800.github.io/Taxi-Saintamour/" target="_blank" rel="noopener">Taxi Saintamour</a>
+      <a href="mailto:colin.jerome2012@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
