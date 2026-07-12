@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Bâtisseur du Web — Sites vitrines sur-mesure pour artisans & indépendants</title>
+<meta name="description" content="Le Bâtisseur du Web (Colin Jérôme) conçoit des sites vitrines sur-mesure, optimisés SEO local, pour artisans et indépendants. Découvrez Tom Legrand Jardin & Services et Taxi Saintamour.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a14;
+    --bg-panel:rgba(255,255,255,0.045);
+    --bg-panel-hover:rgba(255,255,255,0.075);
+    --ink:#f5f5fa;
+    --ink-soft:#b7b7c8;
+    --line:rgba(255,255,255,0.12);
+    --accent-a:#7c5cff;
+    --accent-b:#ff5da2;
+    --accent-c:#00d4ff;
+    --accent-d:#ffb020;
+    --gradient:linear-gradient(120deg, var(--accent-a), var(--accent-b) 50%, var(--accent-c) 100%);
+    --gradient-warm:linear-gradient(120deg, var(--accent-d), var(--accent-b));
+    --radius:20px;
+    --shadow: 0 30px 80px -30px rgba(0,0,0,0.65);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3,.logo{font-family:'Playfair Display',serif;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+  .gradient-text{
+    background:var(--gradient);
+    background-size:200% 200%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:var(--accent-b);
+    animation:gradientShift 8s ease infinite;
+  }
+  @keyframes gradientShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;
+    font-weight:600;margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--gradient);display:inline-block;border-radius:2px;}
+
+  /* AURORA BACKGROUND */
+  .aurora{
+    position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  }
+  .aurora .blob{
+    position:absolute;border-radius:50%;filter:blur(90px);opacity:0.55;
+    will-change:transform;
+  }
+  .blob-1{
+    width:560px;height:560px;top:-160px;left:-120px;
+    background:radial-gradient(circle, var(--accent-a), transparent 70%);
+    animation:float1 22s ease-in-out infinite alternate;
+  }
+  .blob-2{
+    width:620px;height:620px;top:10%;right:-200px;
+    background:radial-gradient(circle, var(--accent-b), transparent 70%);
+    animation:float2 26s ease-in-out infinite alternate;
+  }
+  .blob-3{
+    width:480px;height:480px;bottom:-140px;left:15%;
+    background:radial-gradient(circle, var(--accent-c), transparent 70%);
+    animation:float3 20s ease-in-out infinite alternate;
+  }
+  .blob-4{
+    width:420px;height:420px;bottom:5%;right:8%;
+    background:radial-gradient(circle, var(--accent-d), transparent 70%);
+    opacity:0.35;
+    animation:float1 30s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes float1{
+    0%{transform:translate(0,0) scale(1);}
+    100%{transform:translate(80px,60px) scale(1.15);}
+  }
+  @keyframes float2{
+    0%{transform:translate(0,0) scale(1);}
+    100%{transform:translate(-90px,50px) scale(1.1);}
+  }
+  @keyframes float3{
+    0%{transform:translate(0,0) scale(1);}
+    100%{transform:translate(60px,-70px) scale(1.2);}
+  }
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,10,20,0.65);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;position:relative;z-index:1;
+  }
+  .logo{font-size:1.3rem;font-weight:700;color:var(--ink);}
+  .logo span{
+    background:var(--gradient);background-size:200% 200%;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:gradientShift 8s ease infinite;
+  }
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a{font-size:0.93rem;font-weight:500;color:var(--ink-soft);transition:color .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 26px;border-radius:999px;
+    font-weight:600;font-size:0.92rem;
+    transition:transform .25s ease, box-shadow .25s ease, background-position .5s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--gradient);background-size:200% 200%;
+    color:#fff;box-shadow:0 8px 26px -8px rgba(124,92,255,0.65);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 36px -10px rgba(255,93,162,0.55);
+    background-position:100% 50%;
+  }
+  .btn-outline{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,0.04);}
+  .btn-outline:hover{border-color:var(--accent-c);background:rgba(0,212,255,0.08);transform:translateY(-2px);}
+  .nav-cta{display:none;}
+  @media(min-width:760px){.nav-cta{display:inline-flex;}}
+  .nav-links{display:none;}
+  @media(min-width:900px){.nav-links{display:flex;}}
+
+  /* HERO */
+  .hero{padding:96px 0 70px;position:relative;}
+  .hero-inner{position:relative;z-index:1;max-width:760px;}
+  .hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.15;margin:0 0 22px;font-weight:700;color:var(--ink);}
+  .hero h1 em{font-style:italic;}
+  .hero p.lead{font-size:1.12rem;color:var(--ink-soft);max-width:600px;margin:0 0 34px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:46px;}
+  .trust-row{display:flex;flex-wrap:wrap;gap:12px;}
+  .trust-chip{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:999px;
+    padding:9px 18px;font-size:0.85rem;font-weight:500;color:var(--ink-soft);
+    display:flex;align-items:center;gap:8px;backdrop-filter:blur(8px);
+  }
+  .trust-chip .dot{
+    width:7px;height:7px;border-radius:50%;background:var(--gradient);
+    animation:pulseDot 2.4s ease-in-out infinite;
+  }
+  @keyframes pulseDot{
+    0%,100%{transform:scale(1);opacity:1;}
+    50%{transform:scale(1.6);opacity:0.6;}
+  }
+
+  /* SECTION TITLES */
+  .section{padding:84px 0;position:relative;}
+  .section-head{max-width:640px;margin:0 auto 52px;text-align:left;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:0 0 14px;color:var(--ink);}
+  .section-head p{color:var(--ink-soft);font-size:1.02rem;margin:0;}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* PROJECT CARDS */
+  .project{
+    display:grid;grid-template-columns:1fr;gap:0;
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);margin-bottom:44px;
+    backdrop-filter:blur(18px);
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .project:hover{border-color:rgba(124,92,255,0.45);transform:translateY(-4px);}
+  @media(min-width:880px){
+    .project{grid-template-columns:1.05fr 1fr;}
+    .project.reverse{grid-template-columns:1fr 1.05fr;}
+    .project.reverse .project-media{order:2;}
+    .project.reverse .project-body{order:1;}
+  }
+  .project-media{position:relative;min-height:260px;background:#0d0d18;overflow:hidden;}
+  .project-media img{width:100%;height:100%;object-fit:cover;min-height:260px;transition:transform .6s ease;}
+  .project:hover .project-media img{transform:scale(1.06);}
+  .project-media .status{
+    position:absolute;top:16px;left:16px;z-index:2;
+    background:rgba(10,10,20,0.75);color:#7CFFB2;backdrop-filter:blur(6px);
+    padding:7px 14px;border-radius:999px;font-size:0.76rem;font-weight:600;
+    letter-spacing:0.03em;border:1px solid rgba(124,255,178,0.35);
+  }
+  .media-strip{display:grid;grid-template-columns:1fr 1fr;gap:2px;height:100%;}
+  .media-strip img{height:100%;min-height:130px;object-fit:cover;}
+  .media-strip .full{grid-column:1 / -1;}
+
+  .project-body{padding:38px 40px;display:flex;flex-direction:column;justify-content:center;}
+  .project-tag{font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;}
+  .project-tag.tl{color:var(--accent-c);}
+  .project-tag.taxi{color:var(--accent-d);}
+  .project-body h3{font-size:1.55rem;margin:0 0 6px;color:var(--ink);}
+  .project-body .role{color:var(--ink-soft);font-size:0.95rem;margin-bottom:16px;}
+  .project-body p.desc{color:var(--ink-soft);margin:0 0 20px;}
+  .feature-list{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:10px;}
+  .feature-list li{display:flex;gap:10px;font-size:0.92rem;color:var(--ink);}
+  .feature-list li::before{content:"✓";background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;}
+  .project-links{display:flex;flex-wrap:wrap;gap:12px;}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .service-card{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:16px;padding:28px 24px;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    backdrop-filter:blur(14px);
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(255,93,162,0.4);}
+  .service-card .icon{
+    width:44px;height:44px;border-radius:12px;background:var(--gradient);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:16px;
+  }
+  .service-card h3{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:600;margin:0 0 8px;color:var(--ink);}
+  .service-card p{font-size:0.92rem;color:var(--ink-soft);margin:0;}
+
+  /* PROCESS */
+  .process{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;}
+  .process-step{position:relative;padding-left:2px;}
+  .process-step .num{
+    font-family:'Playfair Display',serif;font-size:2.1rem;
+    background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    margin-bottom:8px;display:block;
+  }
+  .process-step h3{font-size:1rem;margin:0 0 6px;color:var(--ink);}
+  .process-step p{font-size:0.9rem;color:var(--ink-soft);margin:0;}
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--bg-panel);border:1px solid var(--line);color:#fff;border-radius:24px;padding:56px 44px;
+    display:flex;flex-direction:column;gap:26px;align-items:flex-start;
+    position:relative;overflow:hidden;backdrop-filter:blur(18px);box-shadow:var(--shadow);
+  }
+  .contact-box::after{
+    content:"";position:absolute;right:-60px;bottom:-100px;width:320px;height:320px;
+    background:radial-gradient(circle, rgba(255,93,162,0.35), transparent 70%);
+    pointer-events:none;
+  }
+  .contact-box h2{color:#fff;margin:0;font-size:clamp(1.6rem,3vw,2.2rem);position:relative;z-index:1;}
+  .contact-box p{color:var(--ink-soft);max-width:520px;margin:0;position:relative;z-index:1;}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:14px;position:relative;z-index:1;}
+
+  footer{padding:36px 0;border-top:1px solid var(--line);position:relative;}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;}
+  footer p{margin:0;color:var(--ink-soft);font-size:0.85rem;}
+  footer .foot-links{display:flex;gap:18px;font-size:0.85rem;}
+  footer .foot-links a{color:var(--ink-soft);transition:color .2s;}
+  footer .foot-links a:hover{color:var(--accent-c);}
+</style>
+</head>
+<body>
+
+<div class="aurora">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo">Le <span>Bâtisseur</span> du Web</a>
+      <div class="nav-links">
+        <a href="#realisations">Réalisations</a>
+        <a href="#services">Ce que je propose</a>
+        <a href="#process">Méthode</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="btn btn-primary nav-cta">Discuter d'un projet</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="eyebrow gradient-text">Création de sites vitrines</span>
+        <h1>Je conçois des sites qui donnent <em class="gradient-text">envie d'appeler</em>, pas juste envie de regarder.</h1>
+        <p class="lead">Sites vitrines sur-mesure pour artisans et indépendants&nbsp;: SEO local travaillé, mobile-first, formulaires de devis et réservation intégrés. Deux réalisations récentes ci-dessous&nbsp;: un paysagiste en ligne depuis plusieurs mois, et une refonte complète pour un taxi conventionné.</p>
+        <div class="hero-actions">
+          <a href="#realisations" class="btn btn-primary">Voir mes réalisations</a>
+          <a href="#contact" class="btn btn-outline">Discuter d'un projet</a>
+        </div>
+        <div class="trust-row">
+          <span class="trust-chip"><span class="dot"></span>SEO local &amp; pages villes</span>
+          <span class="trust-chip"><span class="dot"></span>Mobile-first &amp; PWA</span>
+          <span class="trust-chip"><span class="dot"></span>Formulaires devis / réservation</span>
+          <span class="trust-chip"><span class="dot"></span>Données structurées Schema.org</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REALISATIONS -->
+  <section class="section" id="realisations">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow gradient-text">Réalisations</span>
+        <h2>Deux projets, deux métiers, une même exigence</h2>
+        <p>Chaque site est pensé pour son secteur&nbsp;: contenu réel, référencement local sérieux et un design qui inspire confiance dès la première visite.</p>
+      </div>
+
+      <!-- PROJECT 1 : TOM LEGRAND -->
+      <article class="project reveal">
+        <div class="project-media">
+          <span class="status">● En ligne</span>
+          <img src="img/tl-taille-haie-hebecourt.jpg" alt="Haie parfaitement taillée par Tom Legrand, paysagiste à Hébécourt" loading="lazy">
+        </div>
+        <div class="project-body">
+          <span class="project-tag tl">Paysagiste — Hébécourt (27)</span>
+          <h3>Tom Legrand Jardin &amp; Services</h3>
+          <p class="role">Site vitrine complet + SEO local multi-villes</p>
+          <p class="desc">Un site vitrine pour un paysagiste indépendant intervenant dans 4 départements (Eure, Oise, Val-d'Oise, Seine-Maritime). L'objectif&nbsp;: transformer les recherches locales en appels, avec une preuve sociale immédiate (avis Google 5★) et un formulaire de devis sans friction.</p>
+          <ul class="feature-list">
+            <li>8 pages villes dédiées (Gisors, Vernon, Étrépagny, Les Andelys…) pour capter les recherches locales</li>
+            <li>Blog intégré pour le référencement longue traîne</li>
+            <li>Données structurées LocalBusiness (JSON-LD) et avis Google connectés</li>
+            <li>Formulaire de devis gratuit avec sélection du type de prestation</li>
+            <li>100% responsive, hébergé et mis à jour en continu</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://tom-legrand-paysagiste.fr/" target="_blank" rel="noopener" class="btn btn-primary">Voir le site en ligne ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 : TAXI SAINTAMOUR -->
+      <article class="project reverse reveal">
+        <div class="project-media">
+          <span class="status">● En ligne</span>
+          <div class="media-strip">
+            <img class="full" src="img/taxi-hero-courses.jpg" alt="Véhicule de Taxi Saintamour pour les courses toutes destinations" loading="lazy">
+            <img src="img/taxi-transport-medicalise.jpg" alt="Transport médicalisé conventionné CPAM par Taxi Saintamour" loading="lazy">
+            <img src="img/taxi-vehicule-9-places.jpg" alt="Véhicule 9 places avec chauffeur, Taxi Saintamour" loading="lazy">
+          </div>
+        </div>
+        <div class="project-body">
+          <span class="project-tag taxi">Taxi conventionné &amp; transport médicalisé — Eure</span>
+          <h3>Taxi Saintamour</h3>
+          <p class="role">Refonte complète d'un site vitrine + PWA</p>
+          <p class="desc">Refonte d'un site pour un taxi conventionné CPAM couvrant 16 communes du Vexin normand. Le défi&nbsp;: rendre lisibles trois activités bien distinctes (courses, transport médicalisé remboursé, véhicule 9 places) et permettre une réservation en quelques secondes, y compris depuis un téléphone installé en app.</p>
+          <ul class="feature-list">
+            <li>Application installable sur mobile (PWA avec icônes et mode hors-ligne)</li>
+            <li>Panneau de réservation en un clic, adapté mobile</li>
+            <li>Zones desservies &amp; tarifs indicatifs pour 16 communes</li>
+            <li>FAQ complète (8 questions) et données structurées TaxiService + FAQPage</li>
+            <li>SEO technique avancé&nbsp;: Open Graph, Twitter Card, geo-meta, sitemap</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://jerome-boop800.github.io/Taxi-Saintamour/" target="_blank" rel="noopener" class="btn btn-primary">Voir le site en ligne ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow gradient-text">Ce que je propose</span>
+        <h2>Un site, pensé pour ramener des clients</h2>
+        <p>Pas de template générique&nbsp;: chaque section est écrite et structurée pour votre métier et votre zone d'intervention.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="icon">🧭</div>
+          <h3>SEO local sur-mesure</h3>
+          <p>Pages villes dédiées, mots-clés locaux, données structurées Schema.org pour apparaître sur les recherches proches de chez vous.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon">📱</div>
+          <h3>Mobile-first &amp; PWA</h3>
+          <p>Des sites pensés d'abord pour le mobile, installables comme une application quand c'est pertinent pour votre activité.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon">📋</div>
+          <h3>Formulaires &amp; réservation</h3>
+          <p>Devis, prise de rendez-vou
