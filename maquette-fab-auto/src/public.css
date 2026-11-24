@@ -646,6 +646,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .p-reel { position: relative; overflow: hidden; padding-block: clamp(64px, 8vw, 96px) clamp(48px, 6vw, 72px); background: radial-gradient(70% 45% at 50% 55%, rgba(225, 29, 38, .16), transparent 70%), var(--carbon); }
 .p-reel-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 32px; }
 .p-reel-head h2 { font-size: clamp(2.2rem, 1.4rem + 3vw, 4rem); margin-top: 14px; }
+.p-reel-sub { margin-top: 10px; color: var(--ink-3); font-size: .9rem; }
 .p-reel-filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .p-reel-filter { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(244, 245, 247, .22); background: transparent; color: var(--ink-2); font-size: .875rem; font-weight: 500; cursor: pointer; }
 .p-reel-filter .num { font-family: var(--font-mono); font-size: .7rem; color: var(--ink-3); }

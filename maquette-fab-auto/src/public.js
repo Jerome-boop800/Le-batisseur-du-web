@@ -288,6 +288,7 @@
      Blocs du thème « Carbon Showroom »
      ========================================================= */
   const hasPhoto = (v) => (v.photos && v.photos.length ? 1 : 0);
+  const REEL_LIMIT = 10;   // nombre de véhicules du carrousel « dernières voitures rentrées »
   const hazard = () => '<div class="p-hazard" aria-hidden="true"></div>';
   const eyebrowLine = (t) => '<p class="p-eyebrow-line">' + t + '</p>';
   const arrowIcon = () => icon('arrow');
@@ -409,12 +410,12 @@
 
       '<section class="p-reel" id="p-reel" aria-labelledby="p-reel-title">' +
         '<div class="p-wrap p-reel-head">' +
-          '<div>' + eyebrowLine('Le showroom') + '<h2 id="p-reel-title">Nos véhicules en stock</h2></div>' +
+          '<div>' + eyebrowLine('Arrivages') + '<h2 id="p-reel-title">Nos dernières voitures rentrées</h2><p class="p-reel-sub">Les ' + REEL_LIMIT + ' derniers véhicules entrés au garage. Tout le stock est dans le showroom.</p></div>' +
           '<div class="p-reel-filters" role="group" aria-label="Filtrer par carrosserie">' +
-            [['', 'Tous']].concat(bodies).map(([k, l]) => '<button type="button" class="p-reel-filter" data-body="' + esc(k) + '" aria-pressed="' + (k === '' ? 'true' : 'false') + '">' + esc(l) + ' <span class="num">' + (k ? avail.filter((v) => v.body === k).length : n) + '</span></button>').join('') +
+            [['', 'Tous']].concat(bodies).map(([k, l]) => '<button type="button" class="p-reel-filter" data-body="' + esc(k) + '" aria-pressed="' + (k === '' ? 'true' : 'false') + '">' + esc(l) + ' <span class="num">' + Math.min(REEL_LIMIT, k ? avail.filter((v) => v.body === k).length : n) + '</span></button>').join('') +
           '</div>' +
         '</div>' +
-        '<div class="p-reel-stage" tabindex="0" aria-roledescription="carrousel" aria-label="Véhicules du showroom. Flèches gauche et droite pour changer de véhicule.">' +
+        '<div class="p-reel-stage" tabindex="0" aria-roledescription="carrousel" aria-label="Dernières voitures rentrées. Flèches gauche et droite pour changer de véhicule.">' +
           '<div class="p-reel-orbit" aria-hidden="true"></div>' +
           '<div class="p-reel-slides"></div>' +
           '<button type="button" class="p-reel-arrow p-reel-prev" aria-label="Véhicule précédent">' + icon('chevronLeft') + '</button>' +
@@ -468,13 +469,13 @@
     const bar = root.querySelector('.p-reel-bar i');
     const cur = root.querySelector('.p-reel-cur');
     const tot = root.querySelector('.p-reel-tot');
-    // Les véhicules avec photo d'abord, le véhicule « à la une » au centre
+    // Les REEL_LIMIT dernières entrées : la plus récente au centre
     let list = [];
     let pos = 0;
     let lastId = null;
 
     function order(src) {
-      const sorted = src.slice().sort((a, b) => (hasPhoto(b) - hasPhoto(a)) || ((b.featured ? 1 : 0) - (a.featured ? 1 : 0)) || byRecent(a, b));
+      const sorted = src.slice().sort(byRecent).slice(0, REEL_LIMIT);
       // Répartit en éventail autour du centre : 1er au centre, puis alternance droite / gauche
       const out = [];
       sorted.forEach((v, i) => { if (i % 2) out.push(v); else out.unshift(v); });
@@ -486,7 +487,7 @@
       pos = Math.max(0, list.indexOf(fan.center));
       lastId = null;
       slidesEl.innerHTML = list.map((v, i) => {
-        const tag = v.status === 'reserve' ? '<span class="pill pill-reserve">Réservé</span>' : v.featured ? '<span class="p-tag-red">À la une</span>' : isNew(v) ? '<span class="p-tag-red">Nouveau</span>' : '';
+        const tag = v.status === 'reserve' ? '<span class="pill pill-reserve">Réservé</span>' : isNew(v) ? '<span class="p-tag-red">Nouveau</span>' : '';
         return '<a class="p-reel-slide" href="' + vehicleHref(v) + '" data-i="' + i + '" draggable="false" aria-label="' + esc(fmt.title(v) + ', ' + fmt.price(v.price)) + '">' +
           '<span class="p-reel-media p-visual">' + Media.photo(v, 0, '') + '</span>' +
           (tag ? '<span class="p-reel-tag">' + tag + '</span>' : '') +
