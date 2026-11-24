@@ -1,0 +1,145 @@
+/* =========================================================
+   Maquette garage — socle commun (tokens + composants de base)
+   Concept : « Carbon Showroom » — fond carbone, typo display étroite
+   type signalétique automobile, accent de marque (--brand) facile à
+   changer pour chaque garage, jaune réservé à l'univers atelier.
+   ========================================================= */
+/* Thème « Carbon Showroom » : un seul univers sombre, assumé (site + espace gérant).
+   Rouge Fab Auto pour le showroom, jaune signalisation pour l'atelier. */
+:root {
+  /* Couleurs */
+  --bg: #0b0d10;            /* carbone profond */
+  --surface: #14171c;
+  --surface-2: #1d2127;     /* zones secondaires, fonds de vignettes */
+  --ink: #f4f5f7;           /* chrome clair : texte principal */
+  --ink-2: #b9bfc8;         /* texte secondaire */
+  --ink-3: #868e9a;         /* légendes, placeholders */
+  --line: #272c34;
+  --brand: #e11d26;         /* ACCENT DE MARQUE — rouge Fab Auto */
+  --brand-ink: #ffffff;     /* texte posé sur --brand */
+  --brand-soft: #2b1114;    /* fond teinté de l'accent */
+  --logo-bg: #26252b;       /* anthracite de la carte de visite */
+  --logo-accent: #e11d26;
+  --ok: #41c487;  --ok-soft: #10291d;
+  --warn: #f0a63a; --warn-soft: #2f2210;
+  --bad: #f2776d;  --bad-soft: #35150f;
+  --studio-1: #262a31;      /* dégradé du « studio photo » des visuels */
+  --studio-2: #0d0f12;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .38);
+  --phone-frame: #2a2f37;
+  --carbon: #07080a;        /* noir carbone des grands aplats */
+  --yellow: #ffc414;        /* jaune signalisation (univers atelier) */
+  --yellow-ink: #07080a;
+  --glass: rgba(13, 15, 18, .58);
+  --glass-line: rgba(244, 245, 247, .18);
+  color-scheme: dark;
+
+  /* Typographie */
+  --font-display: "Archivo", "Arial Narrow", "Liberation Sans Narrow", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Échelle */
+  --fs-xs: .75rem; --fs-sm: .875rem; --fs-md: 1rem; --fs-lg: 1.125rem;
+  --fs-xl: clamp(1.25rem, 1.1rem + .6vw, 1.5rem);
+  --fs-2xl: clamp(1.6rem, 1.3rem + 1.4vw, 2.25rem);
+  --fs-3xl: clamp(2.2rem, 1.6rem + 3vw, 4rem);
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+  --space: 1rem;
+  --maxw: 1280px;
+}
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--fs-md); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-stretch: 85%; font-weight: 750; line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2.5px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+.num { font-variant-numeric: tabular-nums; }
+.eyebrow { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Boutons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5em; min-height: 44px; padding: .6em 1.15em; border-radius: var(--r-md); border: 1px solid transparent; font-weight: 600; font-size: var(--fs-sm); text-decoration: none; cursor: pointer; transition: background .15s, border-color .15s, transform .1s; white-space: nowrap; }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--brand); color: var(--brand-ink); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--ink-3); }
+.btn-danger { background: var(--bad-soft); color: var(--bad); }
+.btn-block { width: 100%; }
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
+
+/* Pastilles de statut */
+.pill { display: inline-flex; align-items: center; gap: .35em; padding: .2em .6em; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+.pill::before { content: ""; width: .5em; height: .5em; border-radius: 50%; background: currentColor; }
+.pill-disponible { background: var(--ok-soft); color: var(--ok); }
+.pill-reserve { background: var(--warn-soft); color: var(--warn); }
+.pill-vendu { background: var(--bad-soft); color: var(--bad); }
+.pill-nouveau, .pill-nouvelle { background: var(--ink); color: var(--bg); }
+.pill-en-cours { background: var(--warn-soft); color: var(--warn); }
+.pill-conclue { background: var(--ok-soft); color: var(--ok); }
+.pill-perdue { background: var(--surface-2); color: var(--ink-3); }
+
+/* Vignette Crit'Air — couleurs officielles des certificats */
+.critair { display: inline-grid; place-items: center; width: 1.9em; height: 1.9em; border-radius: 50%; font-family: var(--font-display); font-weight: 800; font-size: .8rem; color: #fff; border: 2px solid rgba(255,255,255,.85); box-shadow: 0 0 0 1px rgba(0,0,0,.15); flex: none; }
+.critair-E { background: #2e9d48; }
+.critair-1 { background: #7b3f98; }
+.critair-2 { background: #f2c500; color: #2a2200; }
+.critair-3 { background: #ee7d14; }
+.critair-4 { background: #7a1f2b; }
+
+/* Champs de formulaire */
+.field { display: grid; gap: .35rem; }
+.field > label, .field > .label { font-size: var(--fs-sm); font-weight: 600; color: var(--ink-2); }
+.input, .select, .textarea { width: 100%; min-height: 44px; padding: .6em .8em; border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.textarea { min-height: 110px; resize: vertical; }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
+.hint { font-size: var(--fs-xs); color: var(--ink-3); }
+.error { font-size: var(--fs-xs); color: var(--bad); font-weight: 600; }
+
+/* Logo Fab Auto */
+.brand-mark { display: inline-grid; place-items: center; flex: none; width: 52px; height: 40px; border-radius: var(--r-sm); background: var(--logo-bg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+.brand-mark svg { width: 80%; height: auto; display: block; }
+.brand-word { font-family: var(--font-display); font-stretch: 100%; text-transform: uppercase; letter-spacing: .04em; line-height: 1; white-space: nowrap; }
+.brand-word-a { font-weight: 400; color: var(--ink); }
+.brand-word-b { font-weight: 850; color: var(--brand); }
+
+/* Toast */
+.toast-zone { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 100; display: grid; gap: .5rem; width: min(92vw, 380px); pointer-events: none; }
+.toast { background: var(--ink); color: var(--carbon); padding: .8rem 1rem; border-radius: var(--r-md); font-size: var(--fs-sm); font-weight: 600; box-shadow: var(--shadow); animation: toast-in .25s ease-out; }
+@keyframes toast-in { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Barre de démo (maquette) */
+.demo-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: #000; color: var(--ink); border-bottom: 1px solid var(--line); padding-block: .45rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; font-size: var(--fs-xs); }
+.demo-bar .tag { font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+.demo-switch { display: inline-flex; background: rgba(127,127,127,.25); border-radius: 999px; padding: 3px; }
+.demo-switch button { border: 0; background: transparent; color: inherit; padding: .35rem .8rem; border-radius: 999px; font-weight: 700; font-size: var(--fs-xs); cursor: pointer; min-height: 32px; }
+.demo-switch button[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); }
+.demo-bar .spacer { flex: 1; }
+.demo-bar .reset { background: transparent; border: 1px solid rgba(127,127,127,.5); color: inherit; border-radius: 999px; padding: .3rem .75rem; font-size: var(--fs-xs); cursor: pointer; min-height: 32px; }
+
+/* Scène téléphone pour l'espace gérant sur grand écran */
+.phone-stage { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 2rem; padding-block: 2rem 3rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.phone-aside { max-width: 360px; display: grid; gap: .75rem; align-self: center; }
+.phone-aside h2 { font-size: var(--fs-2xl); }
+.phone-aside p { color: var(--ink-2); }
+.phone { width: 100%; max-width: 400px; height: min(820px, calc(100vh - 120px)); min-height: 640px; border-radius: 44px; border: 10px solid var(--phone-frame); background: var(--bg); overflow: hidden; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,.25); }
+.phone-screen { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; }
+@media (min-width: 900px) { .phone-stage { grid-template-columns: minmax(0, 360px) 400px; justify-content: center; } }
+/* Sur téléphone : l'espace gérant occupe tout l'écran, sans cadre */
+@media (max-width: 899px) {
+  .phone-stage { padding: 0; display: block; }
+  .phone-aside { display: none; }
+  .phone { max-width: none; height: auto; min-height: 0; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+  .phone-screen { position: static; overflow: visible; }
+}
+/* Vue « Gérant · ordinateur » : pas de cadre, l'application occupe toute la largeur */
+.phone-stage.is-desktop { display: block; padding: 0; }
+.phone-stage.is-desktop .phone-aside { display: none; }
+.phone-stage.is-desktop .phone { max-width: none; height: auto; min-height: calc(100vh - var(--demo-bar-h, 46px)); border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+.phone-stage.is-desktop .phone-screen { position: static; overflow: visible; }
+@media (max-width: 899px) { .demo-switch [data-view="desktop"] { display: none; } }
+.phone > .toast-zone { position: absolute; width: calc(100% - 32px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

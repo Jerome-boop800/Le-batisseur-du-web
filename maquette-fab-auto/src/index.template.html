@@ -1,0 +1,40 @@
+<title>Showroom Garage</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Maquette cliquable : site showroom de véhicules d'occasion et espace gérant mobile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/*@@CSS@@*/
+</style>
+
+<div class="demo-bar" role="region" aria-label="Barre de démonstration">
+  <span class="tag">Maquette</span>
+  <div class="demo-switch" role="group" aria-label="Choisir la vue">
+    <button type="button" data-mode="public" aria-pressed="true">Site client</button>
+    <button type="button" data-mode="gerant" data-view="phone" aria-pressed="false">Gérant · téléphone</button>
+    <button type="button" data-mode="gerant" data-view="desktop" aria-pressed="false">Gérant · ordinateur</button>
+  </div>
+  <span class="spacer"></span>
+  <button type="button" class="reset" aria-label="Réinitialiser la démo">Réinitialiser</button>
+</div>
+
+<main id="public-root"></main>
+
+<section id="gerant-stage" class="phone-stage" hidden aria-label="Espace gérant">
+  <div class="phone-aside">
+    <span class="eyebrow">Espace gérant</span>
+    <h2>Le garage se gère depuis le téléphone.</h2>
+    <p>Voici ce que voit le patron. Il photographie la voiture sur le parking, remplit la fiche, publie : elle apparaît aussitôt sur le site.</p>
+    <p>Essayez : ajoutez un véhicule, passez-en un en « Vendu » ou changez un prix, puis revenez sur « Site client ».</p>
+    <p><button type="button" class="btn btn-primary" data-switch-view="desktop">Voir l’interface ordinateur</button></p>
+    <p class="hint">Identifiants de démonstration déjà remplis. Aucune donnée n'est envoyée : tout reste dans ce navigateur.</p>
+  </div>
+  <div class="phone">
+    <div class="phone-screen" id="gerant-root"></div>
+  </div>
+</section>
+
+<script>
+/*@@JS@@*/
+</script>
