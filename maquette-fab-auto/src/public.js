@@ -136,7 +136,7 @@
     const year = new Date().getFullYear();
     return '' +
       '<footer class="p-footer">' +
-        '<div class="p-wrap"><p class="p-signature" aria-hidden="true">' + esc(GARAGE.name) + '</p></div>' +
+        '<div class="p-wrap"><p class="p-signature" aria-hidden="true" data-text="' + esc(GARAGE.name) + '">' + esc(GARAGE.name) + '</p></div>' +
         '<div class="p-wrap p-footer-grid">' +
           '<div class="p-footer-brand">' +
             '<p class="p-logo p-logo-static">' + App.Brand.mark() + App.Brand.word('p-logo-name') + '</p>' +
@@ -148,7 +148,7 @@
             '<p class="p-footer-line">' + icon('phone') + '<span class="num">' + esc(GARAGE.phone) + '</span></p>' +
             '<p class="p-footer-line">' + icon('mail') + '<span>' + esc(GARAGE.email) + '</span></p>' +
             (GARAGE.socials || []).map(([net, handle]) => '<p class="p-footer-line p-footer-social"><span class="p-muted">' + esc(net) + '</span><span>' + esc(handle) + '</span></p>').join('') +
-            '<p class="p-footer-actions"><a class="btn btn-ghost" href="' + telHref(GARAGE.phone) + '">Appeler</a> <a class="btn btn-ghost" href="#contact">Écrire</a></p>' +
+            '<p class="p-footer-actions"><a class="btn btn-primary" href="' + telHref(GARAGE.phone) + '">Appeler</a> <a class="btn btn-primary" href="#contact">Écrire</a></p>' +
           '</div>' +
           '<nav aria-label="Liens du pied de page"><h2 class="p-footer-title">Le site</h2><ul class="p-footer-links">' +
             '<li><a href="#showroom">Nos véhicules</a></li><li><a href="#garage">Le garage</a></li><li><a href="#contact">Contact</a></li><li><a href="#mentions">Mentions légales</a></li><li><a href="#gerant">Espace gérant</a></li>' +
@@ -393,7 +393,7 @@
     const h = 'h' + (titleLevel || 2);
     return '' +
       '<div class="p-wrap p-services-x">' +
-        '<div class="p-services-head">' + chromeStars(3) + '<' + h + ' id="p-serv-title">Nos services</' + h + '></div>' +
+        '<div class="p-services-head">' + chromeStars(5) + '<' + h + ' id="p-serv-title">Nos services</' + h + '></div>' +
         '<ul class="p-hexes">' + SERVICES.map(([ic, t, d]) =>
           '<li><span class="p-hex" aria-hidden="true">' + icon(ic) + '</span><h3>' + t + '</h3><p>' + d + '</p></li>').join('') + '</ul>' +
       '</div>';

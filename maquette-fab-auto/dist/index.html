@@ -1130,6 +1130,27 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) { .p-star { animation: none; } }
 
 /* =========================================================
+   Signature « FAB AUTO » du pied de page : liseré de la couleur des boutons
+   sur le contour des lettres, avec un reflet très léger qui passe dessus.
+   ========================================================= */
+.p-site .p-signature {
+  position: relative; color: transparent;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--brand) 85%, transparent);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 35%, transparent));
+}
+.p-site .p-signature::after {
+  content: attr(data-text); position: absolute; inset: 0; padding: inherit; pointer-events: none;
+  color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--brand) 25%, #fff);
+  -webkit-mask-image: linear-gradient(100deg, transparent 42%, #000 50%, transparent 58%);
+          mask-image: linear-gradient(100deg, transparent 42%, #000 50%, transparent 58%);
+  -webkit-mask-size: 260% 100%; mask-size: 260% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: 130% 0; mask-position: 130% 0;
+  animation: p-sig-shine 7s ease-in-out infinite;
+}
+@keyframes p-sig-shine { 0% { -webkit-mask-position: 130% 0; mask-position: 130% 0; } 55%, 100% { -webkit-mask-position: -30% 0; mask-position: -30% 0; } }
+@media (prefers-reduced-motion: reduce) { .p-site .p-signature::after { animation: none; opacity: 0; } }
+
+/* =========================================================
    Maquette garage — ESPACE GÉRANT
    Toutes les classes sont préfixées « g- ». Couleurs : tokens
    uniquement. Vue téléphone : aucune position:fixed, barres en
@@ -3359,7 +3380,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
     const year = new Date().getFullYear();
     return '' +
       '<footer class="p-footer">' +
-        '<div class="p-wrap"><p class="p-signature" aria-hidden="true">' + esc(GARAGE.name) + '</p></div>' +
+        '<div class="p-wrap"><p class="p-signature" aria-hidden="true" data-text="' + esc(GARAGE.name) + '">' + esc(GARAGE.name) + '</p></div>' +
         '<div class="p-wrap p-footer-grid">' +
           '<div class="p-footer-brand">' +
             '<p class="p-logo p-logo-static">' + App.Brand.mark() + App.Brand.word('p-logo-name') + '</p>' +
@@ -3371,7 +3392,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
             '<p class="p-footer-line">' + icon('phone') + '<span class="num">' + esc(GARAGE.phone) + '</span></p>' +
             '<p class="p-footer-line">' + icon('mail') + '<span>' + esc(GARAGE.email) + '</span></p>' +
             (GARAGE.socials || []).map(([net, handle]) => '<p class="p-footer-line p-footer-social"><span class="p-muted">' + esc(net) + '</span><span>' + esc(handle) + '</span></p>').join('') +
-            '<p class="p-footer-actions"><a class="btn btn-ghost" href="' + telHref(GARAGE.phone) + '">Appeler</a> <a class="btn btn-ghost" href="#contact">Écrire</a></p>' +
+            '<p class="p-footer-actions"><a class="btn btn-primary" href="' + telHref(GARAGE.phone) + '">Appeler</a> <a class="btn btn-primary" href="#contact">Écrire</a></p>' +
           '</div>' +
           '<nav aria-label="Liens du pied de page"><h2 class="p-footer-title">Le site</h2><ul class="p-footer-links">' +
             '<li><a href="#showroom">Nos véhicules</a></li><li><a href="#garage">Le garage</a></li><li><a href="#contact">Contact</a></li><li><a href="#mentions">Mentions légales</a></li><li><a href="#gerant">Espace gérant</a></li>' +
@@ -3616,7 +3637,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
     const h = 'h' + (titleLevel || 2);
     return '' +
       '<div class="p-wrap p-services-x">' +
-        '<div class="p-services-head">' + chromeStars(3) + '<' + h + ' id="p-serv-title">Nos services</' + h + '></div>' +
+        '<div class="p-services-head">' + chromeStars(5) + '<' + h + ' id="p-serv-title">Nos services</' + h + '></div>' +
         '<ul class="p-hexes">' + SERVICES.map(([ic, t, d]) =>
           '<li><span class="p-hex" aria-hidden="true">' + icon(ic) + '</span><h3>' + t + '</h3><p>' + d + '</p></li>').join('') + '</ul>' +
       '</div>';

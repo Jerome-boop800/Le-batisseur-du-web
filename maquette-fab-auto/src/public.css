@@ -965,3 +965,24 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 }
 .p-services-head .p-star { width: 26px; height: 26px; }
 @media (prefers-reduced-motion: reduce) { .p-star { animation: none; } }
+
+/* =========================================================
+   Signature « FAB AUTO » du pied de page : liseré de la couleur des boutons
+   sur le contour des lettres, avec un reflet très léger qui passe dessus.
+   ========================================================= */
+.p-site .p-signature {
+  position: relative; color: transparent;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--brand) 85%, transparent);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 35%, transparent));
+}
+.p-site .p-signature::after {
+  content: attr(data-text); position: absolute; inset: 0; padding: inherit; pointer-events: none;
+  color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--brand) 25%, #fff);
+  -webkit-mask-image: linear-gradient(100deg, transparent 42%, #000 50%, transparent 58%);
+          mask-image: linear-gradient(100deg, transparent 42%, #000 50%, transparent 58%);
+  -webkit-mask-size: 260% 100%; mask-size: 260% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: 130% 0; mask-position: 130% 0;
+  animation: p-sig-shine 7s ease-in-out infinite;
+}
+@keyframes p-sig-shine { 0% { -webkit-mask-position: 130% 0; mask-position: 130% 0; } 55%, 100% { -webkit-mask-position: -30% 0; mask-position: -30% 0; } }
+@media (prefers-reduced-motion: reduce) { .p-site .p-signature::after { animation: none; opacity: 0; } }
