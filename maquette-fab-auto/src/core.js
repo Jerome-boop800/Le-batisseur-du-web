@@ -398,6 +398,15 @@
     if (r) r.addEventListener('click', () => { Store.reset(); UI.toast('Démo réinitialisée : données d’origine restaurées.'); render(); });
   }
 
+  /* Point lumineux à l'appui sur un bouton (site et espace gérant) :
+     relance l'animation de passage de gauche à droite sur le bouton touché. */
+  document.addEventListener('pointerdown', (e) => {
+    const btn = e.target.closest && e.target.closest('.p-site .btn, #gerant-root .btn');
+    if (!btn || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    btn.classList.remove('is-zap'); void btn.offsetWidth; btn.classList.add('is-zap');
+    clearTimeout(btn._zap); btn._zap = setTimeout(() => btn.classList.remove('is-zap'), 600);
+  });
+
   window.App = { GARAGE, Brand, siteVisibility, SOLD_VISIBLE_DAYS, LISTS, Store, fmt, esc, isNew, publicVehicles, Media, UI, Router, Session, GerantView, render };
   window.addEventListener('hashchange', render);
   document.addEventListener('DOMContentLoaded', () => { initDemoBar(); render(); });

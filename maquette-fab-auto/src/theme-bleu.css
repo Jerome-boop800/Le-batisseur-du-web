@@ -27,7 +27,6 @@
 .p-hx .p-hx-title { color: #0b0d10; }
 .p-hx .p-outline { color: transparent; -webkit-text-stroke-color: #0b0d10; }
 .p-hx .p-hx-lead, .p-hx .p-eyebrow-line { color: #3a414b; }
-.p-hx .btn-glass { background: rgba(11, 13, 16, .05); border-color: rgba(11, 13, 16, .28); color: #0b0d10; }
 .p-hx-featured { background: rgba(255, 255, 255, .72); border-color: rgba(11, 13, 16, .1); color: #0b0d10; box-shadow: 0 20px 40px -20px rgba(9, 34, 64, .35); }
 .p-hx-featured .p-dot-red { color: #3a414b; }
 .p-hx-featured-s { color: #5b636e; }
@@ -53,4 +52,3 @@
 .p-reel { background: radial-gradient(60% 45% at 50% 58%, rgba(31, 182, 255, .24), transparent 70%), radial-gradient(35% 30% at 85% 15%, rgba(122, 227, 255, .12), transparent 70%), linear-gradient(180deg, #0a1424, #07080a 85%); }
 .p-reel-bar i { background: linear-gradient(90deg, var(--electric), var(--brand)); }
 .p-hx-360-dot { box-shadow: 0 0 24px var(--electric-glow); }
-.p-site .btn-primary { box-shadow: 0 10px 24px -10px rgba(22, 115, 255, .7); }

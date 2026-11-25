@@ -124,6 +124,13 @@ Pour publier, utiliser l'outil Artifact sur `dist/index.html` à l'URL « thème
 - **Publication** : `dist/index.html` → lien noir et rouge ; `dist-bleu/index.html` → lien Bleu clair, en passant le dossier `img/` dans `files`.
 - **Livrables** (`../livrables/`) : un PDF de présentation et un fichier hors ligne par version, sources zippées. Régénérer avec `outils/captures.js` puis `outils/make_pdf.py <dossier> <pdf> rouge|bleu`.
 
+## 3 quater. Finitions validées le 25/11/2026
+
+- **Hero** : bulle « À la une » retirée.
+- **Carbone** : motif dessiné en CSS (`--carbon-weave` dans `tokens.css`), continu sur toute la largeur (bandeau des engagements, pied de page, menu du gérant).
+- **Carrousel** : boucle infinie (`offsetOf` / `mod` dans `bindReel`), flèches jamais désactivées.
+- **Boutons « touche en relief »** (fin de `public.css`, fin de `gerant.css`) : coins arrondis 14 px, épaisseur visible, enfoncement à l'appui ; point lumineux qui traverse le bouton de gauche à droite (en boucle sur les boutons principaux du site, et à chaque appui partout). L'écouteur de l'appui est dans `core.js` (classe `is-zap`).
+
 ## 4. Contrôles déjà faits (24/11/2026)
 
 - **Audit complet**, téléphone (390 px) et ordinateur (1440 px), clair et sombre : 0 erreur console, 0 débordement horizontal, 0 image sans texte alternatif, 0 bouton sans nom.
