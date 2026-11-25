@@ -1134,7 +1134,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
    sur le contour des lettres, avec un reflet très léger qui passe dessus.
    ========================================================= */
 .p-site .p-signature {
-  position: relative; color: transparent;
+  position: relative; isolation: isolate; width: fit-content; max-width: 100%; color: transparent;
   -webkit-text-stroke: 2px color-mix(in srgb, var(--brand) 85%, transparent);
   filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 35%, transparent));
 }
@@ -1147,6 +1147,18 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
   -webkit-mask-position: 130% 0; mask-position: 130% 0;
   animation: p-sig-shine 7s ease-in-out infinite;
 }
+/* Lumière qui monte du sol derrière les lettres */
+.p-site .p-signature::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: -6%; right: -6%; bottom: -2%; height: 115%;
+  background:
+    radial-gradient(50% 55% at 50% 100%, color-mix(in srgb, var(--brand) 55%, transparent), transparent 70%),
+    radial-gradient(75% 100% at 50% 100%, color-mix(in srgb, var(--brand) 22%, transparent), transparent 75%);
+  filter: blur(6px);
+}
+/* Rampe lumineuse au sol, source de l'éclairage */
+.p-site .p-signature { padding-bottom: 6px; }
+.p-site .p-signature { background: linear-gradient(90deg, transparent 4%, color-mix(in srgb, var(--brand) 40%, #fff) 50%, transparent 96%) no-repeat 50% 100% / 100% 2px; }
 @keyframes p-sig-shine { 0% { -webkit-mask-position: 130% 0; mask-position: 130% 0; } 55%, 100% { -webkit-mask-position: -30% 0; mask-position: -30% 0; } }
 @media (prefers-reduced-motion: reduce) { .p-site .p-signature::after { animation: none; opacity: 0; } }
 
