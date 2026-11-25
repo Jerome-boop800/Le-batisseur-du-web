@@ -998,3 +998,28 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .p-site .p-signature { background: linear-gradient(90deg, transparent 4%, color-mix(in srgb, var(--brand) 40%, #fff) 50%, transparent 96%) no-repeat 50% 100% / 100% 2px; }
 @keyframes p-sig-shine { 0% { -webkit-mask-position: 130% 0; mask-position: 130% 0; } 55%, 100% { -webkit-mask-position: -30% 0; mask-position: -30% 0; } }
 @media (prefers-reduced-motion: reduce) { .p-site .p-signature::after { animation: none; opacity: 0; } }
+
+/* =========================================================
+   Logo : un trait de lumière blanche part du pictogramme
+   et passe ensuite sur « FAB » puis sur « AUTO ».
+   ========================================================= */
+.p-site .p-logo .brand-mark { position: relative; overflow: hidden; }
+.p-site .p-logo .brand-word-a, .p-site .p-logo .brand-word-b { position: relative; }
+.p-site .p-logo .brand-mark::after,
+.p-site .p-logo .brand-word-a::after,
+.p-site .p-logo .brand-word-b::after {
+  position: absolute; inset: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 50%, transparent 60%);
+          mask-image: linear-gradient(100deg, transparent 40%, #000 50%, transparent 60%);
+  -webkit-mask-size: 300% 100%; mask-size: 300% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: 120% 0; mask-position: 120% 0;
+  animation: p-logo-sweep 6s linear infinite;
+}
+.p-site .p-logo .brand-mark::after { content: ""; background: rgba(255, 255, 255, .6); }
+.p-site .p-logo .brand-word-a::after { content: "FAB"; inset: -12px -14px; padding: 12px 14px; color: #fff; text-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 255, 255, .8); animation-delay: .38s; }
+.p-site .p-logo .brand-word-b::after { content: "AUTO"; inset: -12px -14px; padding: 12px 14px; color: #fff; text-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 255, 255, .8); animation-delay: .62s; }
+@keyframes p-logo-sweep {
+  0% { -webkit-mask-position: 120% 0; mask-position: 120% 0; }
+  12%, 100% { -webkit-mask-position: -20% 0; mask-position: -20% 0; }
+}
+@media (prefers-reduced-motion: reduce) { .p-site .p-logo .brand-mark::after, .p-site .p-logo .brand-word-a::after, .p-site .p-logo .brand-word-b::after { animation: none; opacity: 0; } }
