@@ -1,6 +1,6 @@
 # Fichier de reprise — Maquette Fab Auto
 
-Fichier mis à jour le 24 novembre 2026 (passage au thème « Carbon Showroom »). Il sert à reprendre le projet sans rien perdre, dans une nouvelle session Claude ou à la main. **Pour reprendre avec Claude**, il suffit de lui donner ce fichier et le zip des sources en disant : « Reprends la maquette Fab Auto à partir de ce fichier ».
+Fichier mis à jour le 25 novembre 2026 en fin de journée (étoiles or, pied de page lumineux, lumière sur le logo). Il sert à reprendre le projet sans rien perdre, dans une nouvelle session Claude ou à la main. **Pour reprendre avec Claude**, il suffit de lui donner ce fichier et le zip des sources en disant : « Reprends la maquette Fab Auto à partir de ce fichier ».
 
 ---
 
@@ -130,6 +130,24 @@ Pour publier, utiliser l'outil Artifact sur `dist/index.html` à l'URL « thème
 - **Carbone** : motif dessiné en CSS (`--carbon-weave` dans `tokens.css`), continu sur toute la largeur (bandeau des engagements, pied de page, menu du gérant).
 - **Carrousel** : boucle infinie (`offsetOf` / `mod` dans `bindReel`), flèches jamais désactivées.
 - **Boutons « touche en relief »** (fin de `public.css`, fin de `gerant.css`) : coins arrondis 14 px, épaisseur visible, enfoncement à l'appui ; point lumineux qui traverse le bouton de gauche à droite (en boucle sur les boutons principaux du site, et à chaque appui partout). L'écouteur de l'appui est dans `core.js` (classe `is-zap`).
+
+## 3 quinquies. Point d'arrêt du 25/11/2026 — à reprendre ici
+
+**Validé et en ligne** (maquettes publiées et livrables régénérés) :
+- **Étoiles en or poli façon bijou** : vraie image `img/etoile-or.webp` (96 px, détourée), générée d'après la référence du client. L'original en grand est dans `figma-fab-auto/assets/etoile-or-hd.png`. 5 étoiles sur l'affiche de l'atelier, 5 au-dessus de « Nos services » (`GOLD_STAR` et `chromeStars()` dans `public.js`, halo animé `p-star-shine` dans `public.css`).
+- **Pied de page** : boutons « Appeler » et « Écrire » en `btn-primary` ; signature géante « FAB AUTO » en **liseré seul** de la couleur des boutons (bleu ou rouge selon la version), reflet blanc qui glisse sur le contour (`::after` + masque, `p-sig-shine`), et **lumière qui monte du sol** derrière les lettres avec une fine rampe lumineuse (`::before` + fond de `.p-signature`).
+
+**Fait, montré au client, PAS ENCORE publié** :
+- **Lumière blanche sur le logo** (fin de `public.css`, animation `p-logo-sweep`) : un trait de lumière part du pictogramme, puis passe sur « FAB » puis « AUTO », environ 1 s toutes les 6 s. Le client a dit « ça me plaît bien ». Le code est déjà dans `src/` et dans `dist/` et `dist-bleu/` (reconstruits), mais les deux artefacts en ligne ne l'ont pas encore.
+
+**Pour reprendre (dans l'ordre)** :
+1. Demander au client s'il veut ajuster le rythme du reflet du logo (plus lent, plus discret…), sinon le considérer comme validé.
+2. Publier les deux maquettes (même fichier, même lien) :
+   - noir et rouge : `maquette-fab-auto/dist/index.html` → https://claude.ai/artifact/PpZcfXRtcgs2CZyrDx8d7N (public)
+   - bleu clair : `maquette-fab-auto/dist-bleu/index.html` → https://claude.ai/artifact/3Tu7RCXkwLSgm1EYg4UJsy (encore **privé** : le client doit le passer en « Toute personne disposant du lien »)
+3. Régénérer les livrables dans `livrables/` : construire les versions autonomes (`python3 build.py <dossier>/index.html --standalone`, et `--theme=bleu`) avec une copie de `dist/img` (ou `dist-bleu/img`) à côté, lancer `node livrables/outils/captures.js <dossier>`, puis `python3 livrables/outils/make_pdf.py <dossier> <pdf> rouge|bleu`, refaire les deux HTML hors ligne (images `img/…` remplacées par des data URI) et le zip `maquette-fab-auto-sources-v5.zip`.
+4. Toujours ouvert : le connecteur Google Drive du compte pro est en lecture seule ; il faut le reconnecter avec tous les droits pour déposer les livrables sur le Drive pro et refaire le brouillon de mail dans le Gmail pro.
+
 
 ## 4. Contrôles déjà faits (24/11/2026)
 
