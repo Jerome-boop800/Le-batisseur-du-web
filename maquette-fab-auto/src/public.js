@@ -306,20 +306,37 @@
       '</div></section>';
   }
 
-  /* Rangée d'étoiles argentées chromées (décor de l'atelier), avec un éclat qui scintille */
-  let starSeq = 0;
+  /* Rangée d'étoiles en or, taillées en facettes comme un bijou, avec épaisseur et éclat.
+     La géométrie (10 facettes éclairées depuis le haut à gauche) est calculée une seule fois. */
+  const GOLD_STAR = (function () {
+    const cx = 12, cy = 12.2, R = 10.6, r = 4.5, pts = [];
+    for (let i = 0; i < 10; i++) {
+      const a = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? r : R;
+      pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a)]);
+    }
+    const f = (n) => n.toFixed(2);
+    const outline = 'M' + pts.map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z';
+    const dark = [110, 72, 10], mid = [228, 168, 36], light = [255, 238, 165];
+    const mix = (c1, c2, t) => 'rgb(' + c1.map((v, k) => Math.round(v + (c2[k] - v) * t)).join(',') + ')';
+    const facets = pts.map((p, i) => {
+      const q = pts[(i + 1) % 10];
+      const mx = (p[0] + q[0]) / 2 - cx, my = (p[1] + q[1]) / 2 - cy, l = Math.hypot(mx, my);
+      const t = ((mx / l) * -0.6 + (my / l) * -0.8 + 1) / 2;     // 0 = dans l'ombre, 1 = face à la lumière
+      const col = t < 0.5 ? mix(dark, mid, t * 2) : mix(mid, light, (t - 0.5) * 2);
+      return '<path d="M' + cx + ' ' + cy + 'L' + f(p[0]) + ' ' + f(p[1]) + 'L' + f(q[0]) + ' ' + f(q[1]) + 'Z" fill="' + col + '"/>';
+    }).join('');
+    return '<svg class="p-star" viewBox="0 0 24 26" width="24" height="26">' +
+      '<path d="' + outline + '" transform="translate(0 2)" fill="#4a3005"/>' +          // tranche (épaisseur)
+      '<path d="' + outline + '" transform="translate(0 1)" fill="#8f6411"/>' +
+      facets +
+      '<path d="' + outline + '" fill="none" stroke="#fff3c4" stroke-opacity=".7" stroke-width=".45" stroke-linejoin="round"/>' +
+      '<ellipse cx="9" cy="8.2" rx="2.6" ry="1.2" fill="#fff" opacity=".55" transform="rotate(-35 9 8.2)"/>' +   // reflet
+      '<path class="p-star-glint" d="M17.5 3.2l.55 1.45 1.45.55-1.45.55-.55 1.45-.55-1.45-1.45-.55 1.45-.55z" fill="#fff"/>' +
+      '</svg>';
+  })();
   function chromeStars(n) {
     let out = '<span class="p-stars" aria-hidden="true">';
-    for (let i = 0; i < n; i++) {
-      const id = 'p-chrome-' + (++starSeq);
-      out += '<svg class="p-star" viewBox="0 0 24 24" width="22" height="22">' +
-        '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1">' +
-          '<stop offset="0" stop-color="#ffffff"/><stop offset=".38" stop-color="#d9dee4"/><stop offset=".5" stop-color="#7d8794"/>' +
-          '<stop offset=".62" stop-color="#c3cad3"/><stop offset="1" stop-color="#f4f6f8"/></linearGradient></defs>' +
-        '<path d="M12 1.8l3 6.3 6.9.8-5.1 4.8 1.4 6.9L12 17.2l-6.2 3.4 1.4-6.9-5.1-4.8 6.9-.8z" fill="url(#' + id + ')" stroke="rgba(255,255,255,.75)" stroke-width=".6" stroke-linejoin="round"/>' +
-        '<path class="p-star-glint" d="M17.5 3.2l.55 1.45 1.45.55-1.45.55-.55 1.45-.55-1.45-1.45-.55 1.45-.55z" fill="#fff"/>' +
-        '</svg>';
-    }
+    for (let i = 0; i < n; i++) out += GOLD_STAR;
     return out + '</span>';
   }
 
