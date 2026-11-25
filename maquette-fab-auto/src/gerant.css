@@ -1156,4 +1156,4 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
 .phone-aside .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-2); }
 .phone-aside .eyebrow::before { content: ""; width: 32px; height: 2px; background: var(--brand); }
 .phone-stage:not(.is-desktop) { background: radial-gradient(40% 60% at 70% 50%, rgba(225, 29, 38, .14), transparent 70%); }
-.g-d-side { background: linear-gradient(rgba(10, 12, 15, .9), rgba(10, 12, 15, .9)), var(--carbon) url("img/texture-carbone.webp") center / 360px; }
+.g-d-side { background: linear-gradient(rgba(10, 12, 15, .78), rgba(10, 12, 15, .78)), var(--carbon-weave); }

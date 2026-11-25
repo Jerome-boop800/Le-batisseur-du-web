@@ -7,7 +7,7 @@
    ========================================================= */
 :root { --electric: #1fb6ff; --electric-2: #7ae3ff; --electric-glow: rgba(31, 182, 255, .55); }
 .p-eyebrow-line::before { background: linear-gradient(90deg, var(--electric), var(--electric-2)); }
-.p-strip::before { background: linear-gradient(100deg, rgba(7, 8, 10, .8), rgba(9, 34, 64, .74) 55%, rgba(7, 8, 10, .72)); }
+.p-strip::before { background: linear-gradient(100deg, rgba(7, 8, 10, .5), rgba(9, 34, 64, .55) 55%, rgba(7, 8, 10, .45)); }
 .p-promise { border-top: 2px solid transparent; border-image: linear-gradient(90deg, var(--electric), var(--electric-2) 55%, transparent) 1; }
 .p-promise-big { color: #fff; text-shadow: 0 0 18px rgba(31, 182, 255, .35); }
 .p-reel { background: radial-gradient(60% 45% at 50% 58%, rgba(31, 182, 255, .24), transparent 70%), radial-gradient(35% 30% at 85% 15%, rgba(225, 29, 38, .14), transparent 70%), linear-gradient(180deg, #0a1424, #07080a 85%); }

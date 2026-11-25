@@ -412,21 +412,9 @@
   function pageHome() {
     const avail = available().sort(byRecent);
     const n = avail.length;
-    const featured = avail.filter((v) => v.featured && hasPhoto(v))[0] || avail.filter((v) => v.featured)[0] || avail[0];
     const warranty = maxWarranty();
     const makeOpts = makesOf(avail).map((m) => [m, m + ' (' + avail.filter((v) => v.make === m).length + ')']);
     const bodies = LISTS.bodies.filter(([k]) => avail.some((v) => v.body === k));
-
-    const featuredHtml = featured ? '' +
-      '<a class="p-hx-featured" href="' + vehicleHref(featured) + '">' +
-        '<span class="p-hx-featured-img p-visual">' + Media.photo(featured, 0, '') + '</span>' +
-        '<span class="p-hx-featured-txt">' +
-          '<span class="p-label p-dot-red">À la une</span>' +
-          '<span class="p-hx-featured-t">' + esc(fmt.title(featured)) + '</span>' +
-          '<span class="p-hx-featured-s num">' + esc(featured.year) + ' · ' + esc(fmt.km(featured.km)) + ' · ' + esc(featured.fuel) + '</span>' +
-          '<span class="p-hx-featured-p num">' + esc(fmt.price(featured.price)) + '</span>' +
-        '</span>' +
-      '</a>' : '';
 
     const html = '' +
       '<section class="p-hx" aria-labelledby="p-h1">' +
@@ -438,7 +426,6 @@
               '<p class="p-hx-lead">Achat, vente, réparation, reprogrammation et dépannage. Chaque véhicule passe par notre atelier avant d’entrer dans le showroom.</p>' +
               '<p class="p-hx-ctas"><a class="btn btn-primary" href="#showroom">Voir les ' + plural(n, 'véhicule', 'véhicules') + ' ' + arrowIcon() + '</a><a class="btn btn-glass" href="#garage">Découvrir l’atelier ' + arrowIcon() + '</a></p>' +
             '</div>' +
-            featuredHtml +
           '</div>' +
           '<form class="p-hx-search" id="p-quick" role="search" aria-label="Recherche rapide" novalidate>' +
             selectField('q-make', 'make', 'Marque', makeOpts, '', 'Toutes les marques') +
