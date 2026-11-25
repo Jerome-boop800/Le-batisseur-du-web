@@ -66,40 +66,40 @@
   const SEED_VEHICLES = [
     { id: 'v1', ref: 'VO-0142', make: 'Peugeot', model: '208', version: '1.2 PureTech 100 Allure', year: 2021, month: 3, km: 38500, fuel: 'Essence', gearbox: 'Manuelle', cv: 5, hp: 100, color: 'Bleu', colorHex: '#1f4fa3', body: 'citadine', doors: 5, seats: 5, critair: '1', price: 15490, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(2), soldAt: null, featured: true,
       equipment: ['Écran tactile 10"', 'Apple CarPlay / Android Auto', 'Caméra de recul', 'Climatisation automatique', 'Régulateur de vitesse', 'Jantes alliage 16"'],
-      description: 'Première main, carnet d’entretien à jour chez Peugeot. Contrôle technique vierge, deux clés, pneus avant neufs.', photos: ['img/v1-citadine-bleue.webp'] },
+      description: 'Première main, carnet d’entretien à jour chez Peugeot. Contrôle technique vierge, deux clés, pneus avant neufs.', photos: ['img/photo-peugeot-208.webp'] },
     { id: 'v2', ref: 'VO-0139', make: 'Renault', model: 'Clio V', version: 'TCe 90 Evolution', year: 2022, month: 6, km: 24900, fuel: 'Essence', gearbox: 'Manuelle', cv: 4, hp: 90, color: 'Blanc', colorHex: '#eef0f2', body: 'citadine', doors: 5, seats: 5, critair: '1', price: 14990, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(4), soldAt: null, featured: false,
       equipment: ['GPS', 'Aide au stationnement arrière', 'Allumage automatique des feux', 'Bluetooth', 'Limiteur de vitesse'],
-      description: 'Faible kilométrage, idéale jeune conducteur (4 CV). Garantie 12 mois pièces et main-d’œuvre incluse.', photos: [] },
+      description: 'Faible kilométrage, idéale jeune conducteur (4 CV). Garantie 12 mois pièces et main-d’œuvre incluse.', photos: ['img/photo-renault-clio.webp'] },
     { id: 'v3', ref: 'VO-0137', make: 'Dacia', model: 'Duster', version: 'Blue dCi 115 4x2 Journey', year: 2023, month: 2, km: 31200, fuel: 'Diesel', gearbox: 'Manuelle', cv: 6, hp: 115, color: 'Gris foncé', colorHex: '#3c4148', body: 'suv', doors: 5, seats: 5, critair: '2', price: 19900, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(6), soldAt: null, featured: true,
       equipment: ['Caméra multivue', 'Écran 8" connecté', 'Barres de toit', 'Climatisation automatique', 'Démarrage sans clé'],
-      description: 'SUV robuste et économique, entretien Dacia à jour. Attelage possible sur demande.', photos: ['img/v3-suv-graphite.webp'] },
+      description: 'SUV robuste et économique, entretien Dacia à jour. Attelage possible sur demande.', photos: ['img/photo-dacia-duster.webp'] },
     { id: 'v4', ref: 'VO-0133', make: 'Volkswagen', model: 'Golf 8', version: '1.5 eTSI 150 DSG7 Life', year: 2021, month: 9, km: 52000, fuel: 'Hybride', gearbox: 'Automatique', cv: 8, hp: 150, color: 'Gris', colorHex: '#7d838b', body: 'compacte', doors: 5, seats: 5, critair: '1', price: 22490, priceType: 'TTC', firstHand: false, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(11), soldAt: null, featured: true,
       equipment: ['Digital Cockpit', 'Régulateur adaptatif', 'Phares LED', 'Sièges chauffants', 'Recharge sans fil', 'Volant chauffant'],
-      description: 'Hybridation légère 48 V, boîte DSG7. Historique complet, factures disponibles.', photos: ['img/v4-compacte-grise.webp'] },
+      description: 'Hybridation légère 48 V, boîte DSG7. Historique complet, factures disponibles.', photos: ['img/photo-vw-golf.webp'] },
     { id: 'v5', ref: 'VO-0131', make: 'Toyota', model: 'Yaris', version: 'Hybride 116h Design', year: 2022, month: 4, km: 29800, fuel: 'Hybride', gearbox: 'Automatique', cv: 5, hp: 116, color: 'Rouge', colorHex: '#b3242a', body: 'citadine', doors: 5, seats: 5, critair: '1', price: 18990, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(14), soldAt: null, featured: false,
       equipment: ['Toyota Safety Sense', 'Caméra de recul', 'Climatisation automatique', 'Apple CarPlay / Android Auto'],
-      description: 'Consommation moyenne relevée : 4,1 L/100 km. Batterie hybride sous garantie constructeur.', photos: [] },
+      description: 'Consommation moyenne relevée : 4,1 L/100 km. Batterie hybride sous garantie constructeur.', photos: ['img/photo-toyota-yaris.webp'] },
     { id: 'v6', ref: 'VO-0128', make: 'Citroën', model: 'C5 Aircross', version: 'PureTech 130 EAT8 Shine', year: 2020, month: 11, km: 61000, fuel: 'Essence', gearbox: 'Automatique', cv: 7, hp: 130, color: 'Noir', colorHex: '#17191c', body: 'suv', doors: 5, seats: 5, critair: '1', price: 21900, priceType: 'TTC', firstHand: false, warrantyMonths: 12, status: 'reserve', addedAt: daysAgo(20), soldAt: null, featured: false,
       equipment: ['Suspensions à butées hydrauliques', 'Toit ouvrant panoramique', 'Hayon électrique', 'Sièges Advanced Comfort'],
-      description: 'SUV familial très confortable, toit panoramique, entretien Citroën à jour.', photos: ['img/v6-suv-noir.webp'] },
+      description: 'SUV familial très confortable, toit panoramique, entretien Citroën à jour.', photos: ['img/photo-citroen-c5-aircross.webp'] },
     { id: 'v7', ref: 'VO-0125', make: 'Renault', model: 'Mégane IV Estate', version: 'Blue dCi 115 Business', year: 2020, month: 1, km: 88000, fuel: 'Diesel', gearbox: 'Manuelle', cv: 6, hp: 115, color: 'Gris', colorHex: '#7d838b', body: 'break', doors: 5, seats: 5, critair: '2', price: 14490, priceType: 'TTC', firstHand: false, warrantyMonths: 6, status: 'disponible', addedAt: daysAgo(27), soldAt: null, featured: false,
       equipment: ['GPS', 'Radars de recul', 'Régulateur de vitesse', 'Coffre 580 L'],
-      description: 'Break familial spacieux, distribution faite à 80 000 km.', photos: [] },
+      description: 'Break familial spacieux, distribution faite à 80 000 km.', photos: ['img/photo-renault-megane-estate.webp'] },
     { id: 'v8', ref: 'VO-0122', make: 'Tesla', model: 'Model 3', version: 'Propulsion', year: 2021, month: 7, km: 64000, fuel: 'Électrique', gearbox: 'Automatique', cv: 3, hp: 325, color: 'Blanc', colorHex: '#eef0f2', body: 'berline', doors: 4, seats: 5, critair: 'E', price: 27900, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(31), soldAt: null, featured: true,
       equipment: ['Autopilot', 'Toit en verre', 'Sièges chauffants', 'Recharge rapide 170 kW', 'Écran 15"'],
-      description: 'Autonomie WLTP 448 km, état de santé batterie 93 % (rapport fourni). Câble de recharge inclus.', photos: ['img/v8-berline-electrique.webp'] },
+      description: 'Autonomie WLTP 448 km, état de santé batterie 93 % (rapport fourni). Câble de recharge inclus.', photos: ['img/photo-tesla-model-3.webp'] },
     { id: 'v9', ref: 'VO-0119', make: 'Peugeot', model: '3008', version: '1.5 BlueHDi 130 EAT8 GT', year: 2021, month: 5, km: 57000, fuel: 'Diesel', gearbox: 'Automatique', cv: 7, hp: 130, color: 'Gris foncé', colorHex: '#3c4148', body: 'suv', doors: 5, seats: 5, critair: '2', price: 25900, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(36), soldAt: null, featured: false,
       equipment: ['i-Cockpit 3D', 'Full LED', 'Caméra 360°', 'Hayon mains libres', 'Grip Control'],
-      description: 'Finition GT, très bien équipée. Révision complète effectuée à la reprise.', photos: [] },
+      description: 'Finition GT, très bien équipée. Révision complète effectuée à la reprise.', photos: ['img/photo-peugeot-3008.webp'] },
     { id: 'v10', ref: 'VO-0116', make: 'Fiat', model: '500', version: '1.0 Hybrid 70 Dolcevita', year: 2022, month: 3, km: 18000, fuel: 'Hybride', gearbox: 'Manuelle', cv: 4, hp: 70, color: 'Beige', colorHex: '#c9b79a', body: 'citadine', doors: 3, seats: 4, critair: '1', price: 12990, priceType: 'TTC', firstHand: true, warrantyMonths: 12, status: 'vendu', addedAt: daysAgo(40), soldAt: daysAgo(3), featured: false,
       equipment: ['Toit vitré fixe', 'Écran 7" connecté', 'Climatisation', 'Jantes 16"'],
-      description: 'Citadine idéale en ville, entretien à jour, deux clés.', photos: [] },
+      description: 'Citadine idéale en ville, entretien à jour, deux clés.', photos: ['img/photo-fiat-500.webp'] },
     { id: 'v11', ref: 'VO-0112', make: 'Renault', model: 'Trafic Fourgon', version: 'L2H1 Blue dCi 130 Grand Confort', year: 2020, month: 10, km: 98000, fuel: 'Diesel', gearbox: 'Manuelle', cv: 8, hp: 130, color: 'Blanc', colorHex: '#eef0f2', body: 'utilitaire', doors: 4, seats: 3, critair: '2', price: 21900, priceType: 'HT', firstHand: true, warrantyMonths: 6, status: 'disponible', addedAt: daysAgo(45), soldAt: null, featured: false,
       equipment: ['Cloison de séparation', 'Galerie de toit', 'Attelage', 'Radars de recul', 'Banquette 2 places'],
-      description: 'Idéal artisan, TVA récupérable. Habillage bois du plancher et des parois.', photos: [] },
+      description: 'Idéal artisan, TVA récupérable. Habillage bois du plancher et des parois.', photos: ['img/photo-renault-trafic.webp'] },
     { id: 'v12', ref: 'VO-0108', make: 'Skoda', model: 'Octavia Combi', version: '2.0 TDI 150 DSG7 Style', year: 2021, month: 2, km: 72000, fuel: 'Diesel', gearbox: 'Automatique', cv: 8, hp: 150, color: 'Vert', colorHex: '#2f5d46', body: 'break', doors: 5, seats: 5, critair: '2', price: 23490, priceType: 'TTC', firstHand: false, warrantyMonths: 12, status: 'disponible', addedAt: daysAgo(52), soldAt: null, featured: false,
       equipment: ['Virtual Cockpit', 'Régulateur adaptatif', 'Hayon électrique', 'Sièges chauffants AV/AR', 'Coffre 640 L'],
-      description: 'Le break le plus logeable de sa catégorie. Entretien Skoda à jour.', photos: [] }
+      description: 'Le break le plus logeable de sa catégorie. Entretien Skoda à jour.', photos: ['img/photo-skoda-octavia.webp'] }
   ];
 
   const SEED_LEADS = [
@@ -111,7 +111,7 @@
   ];
 
   /* ---------- Stockage local (démo uniquement, jamais fiable) ---------- */
-  const KEY = 'garage-maquette-v2';   // v2 : thème carbone + photos de démonstration
+  const KEY = 'garage-maquette-v3';   // v3 : vraies photos (prises sur le parking) pour les 12 véhicules
   const clone = (o) => JSON.parse(JSON.stringify(o));
   let state = { vehicles: clone(SEED_VEHICLES), leads: clone(SEED_LEADS) };
   try {
