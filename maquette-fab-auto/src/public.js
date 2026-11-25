@@ -502,22 +502,23 @@
     const bar = root.querySelector('.p-reel-bar i');
     const cur = root.querySelector('.p-reel-cur');
     const tot = root.querySelector('.p-reel-tot');
-    // Les REEL_LIMIT dernières entrées : la plus récente au centre
+    // Les REEL_LIMIT dernières entrées, en boucle infinie : la plus récente au centre,
+    // la flèche de droite va vers les plus anciennes puis revient à la première.
     let list = [];
-    let pos = 0;
+    let pos = 0;          // position continue (peut dépasser la liste : on travaille modulo n)
     let lastId = null;
-
-    function order(src) {
-      const sorted = src.slice().sort(byRecent).slice(0, REEL_LIMIT);
-      // Répartit en éventail autour du centre : 1er au centre, puis alternance droite / gauche
-      const out = [];
-      sorted.forEach((v, i) => { if (i % 2) out.push(v); else out.unshift(v); });
-      return { list: out, center: sorted[0] };
+    const mod = (a, n) => ((a % n) + n) % n;
+    // Écart le plus court entre la carte i et la position courante, dans la boucle
+    function offsetOf(i) {
+      const n = list.length;
+      if (n < 2) return i - pos;
+      let o = mod(i - pos, n);
+      if (o > n / 2) o -= n;
+      return o;
     }
     function setList(src) {
-      const fan = order(src);
-      list = fan.list;
-      pos = Math.max(0, list.indexOf(fan.center));
+      list = src.slice().sort(byRecent).slice(0, REEL_LIMIT);
+      pos = 0;
       lastId = null;
       slidesEl.innerHTML = list.map((v, i) => {
         const tag = v.status === 'reserve' ? '<span class="pill pill-reserve">Réservé</span>' : isNew(v) ? '<span class="p-tag-red">Nouveau</span>' : '';
@@ -534,8 +535,13 @@
     function metrics() { const s = slidesEl.querySelector('.p-reel-slide'); const w = s ? s.offsetWidth : 560; return { x1: w * 0.84, x2: w * 0.6 }; }
     function layout() {
       const m = metrics();
+      const n = list.length;
       Array.prototype.forEach.call(slidesEl.children, (el, i) => {
-        const o = i - pos, a = Math.abs(o), s = Math.sign(o);
+        const o = offsetOf(i), a = Math.abs(o), s = Math.sign(o);
+        // Une carte qui passe d'un bout à l'autre de la boucle saute sans animation
+        const jump = el.dataset.o !== undefined && Math.abs(o - Number(el.dataset.o)) > n / 2;
+        el.dataset.o = String(o);
+        if (jump) el.style.transition = 'none';
         const a1 = Math.min(a, 1), a2 = Math.max(0, Math.min(a, 2) - 1), a3 = Math.max(0, a - 2);
         const x = s * (a1 * m.x1 + a2 * m.x2 + a3 * m.x2 * 0.6);
         const ry = -s * (a1 * 38 + a2 * 14);
@@ -546,16 +552,17 @@
         el.style.visibility = a > 2.6 ? 'hidden' : 'visible';
         el.classList.toggle('is-active', a < 0.5);
         el.tabIndex = a < 0.5 ? 0 : -1;
+        if (jump) { void el.offsetWidth; el.style.transition = ''; }
       });
-      const n = list.length, idx = Math.round(pos);
-      prev.disabled = idx <= 0; next.disabled = idx >= n - 1;
+      const idx = n ? mod(Math.round(pos), n) : 0;
+      prev.disabled = next.disabled = n < 2;
       bar.style.width = n ? (100 / n) + '%' : '0';
-      bar.style.left = n ? (Math.max(0, Math.min(n - 1, pos)) * 100 / n) + '%' : '0';
-      cur.textContent = String(Math.min(n, idx + 1)).padStart(2, '0');
+      bar.style.left = n ? (idx * 100 / n) + '%' : '0';
+      cur.textContent = String(n ? idx + 1 : 0).padStart(2, '0');
       renderActive();
     }
     function renderActive() {
-      const v = list[Math.round(pos)];
+      const v = list.length ? list[mod(Math.round(pos), list.length)] : null;
       if (!v || v.id === lastId) return;
       lastId = v.id;
       const chips = [v.year, fmt.km(v.km), v.fuel, v.gearbox, v.hp + ' ch', String(v.critair).toUpperCase() === 'E' ? 'Crit’Air E' : 'Crit’Air ' + v.critair]
@@ -569,7 +576,7 @@
           '<a class="btn btn-primary" href="' + vehicleHref(v) + '">Voir la fiche ' + arrowIcon() + '</a></div>' +
       '</div>';
     }
-    function goTo(i) { pos = Math.max(0, Math.min(list.length - 1, i)); layout(); }
+    function goTo(target) { if (!list.length) return; pos = target; layout(); }
     prev.addEventListener('click', () => goTo(Math.round(pos) - 1));
     next.addEventListener('click', () => goTo(Math.round(pos) + 1));
     stage.addEventListener('keydown', (e) => {
@@ -598,11 +605,7 @@
         try { stage.setPointerCapture(e.pointerId); } catch (err) { /* rien */ }
       }
       if (!drag.moved) return;
-      let p = drag.pos - dx / (metrics().x1 * 0.9);
-      const max = list.length - 1;
-      if (p < 0) p *= 0.3;
-      if (p > max) p = max + (p - max) * 0.3;
-      pos = p; layout();
+      pos = drag.pos - dx / (metrics().x1 * 0.9); layout();
     });
     const end = (e) => {
       if (!drag || e.pointerId !== drag.id) return;
@@ -616,8 +619,8 @@
       const s = e.target.closest('.p-reel-slide');
       if (!s) return;
       if (suppress) { e.preventDefault(); return; }
-      const i = Number(s.dataset.i);
-      if (i !== Math.round(pos)) { e.preventDefault(); goTo(i); }
+      const o = Math.round(offsetOf(Number(s.dataset.i)));
+      if (o !== 0) { e.preventDefault(); goTo(Math.round(pos) + o); }
     });
     on(window, 'resize', layout);
     setList(all);

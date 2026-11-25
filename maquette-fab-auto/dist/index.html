@@ -41,6 +41,16 @@
   --glass-line: rgba(244, 245, 247, .18);
   color-scheme: dark;
 
+  /* Motif carbone dessiné en CSS : tissage continu, sans raccord, sur toute la largeur */
+  --carbon-weave:
+    linear-gradient(27deg, #08090b 5px, transparent 5px) 0 5px / 20px 20px,
+    linear-gradient(207deg, #08090b 5px, transparent 5px) 10px 0 / 20px 20px,
+    linear-gradient(27deg, #191c21 5px, transparent 5px) 0 10px / 20px 20px,
+    linear-gradient(207deg, #191c21 5px, transparent 5px) 10px 5px / 20px 20px,
+    linear-gradient(90deg, #111317 10px, transparent 10px) 0 0 / 20px 20px,
+    linear-gradient(#131519 25%, #0e1013 25%, #0e1013 50%, transparent 50%, transparent 75%, #1c1f24 75%, #1c1f24) 0 0 / 20px 20px,
+    #0e1013;
+
   /* Typographie */
   --font-display: "Archivo", "Arial Narrow", "Liberation Sans Narrow", sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -785,8 +795,8 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .p-hx-360 span span { font-size: .75rem; color: var(--ink-2); }
 
 /* ---------- Bandeau des engagements ---------- */
-.p-strip { position: relative; background: var(--carbon) url("img/texture-carbone.webp") center / 420px; }
-.p-strip::before { content: ""; position: absolute; inset: 0; background: rgba(7, 8, 10, .62); }
+.p-strip { position: relative; background: var(--carbon-weave); }
+.p-strip::before { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(255, 255, 255, .05), rgba(7, 8, 10, .35) 35%, rgba(7, 8, 10, .45) 65%, rgba(255, 255, 255, .04)); }
 .p-strip-grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; padding-block: 52px; }
 .p-strip-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .p-promise { display: grid; gap: 8px; padding-top: 20px; border-top: 2px solid var(--brand); min-width: 0; }
@@ -923,8 +933,8 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .p-chip { background: var(--brand-soft); }
 
 /* ---------- Pied de page ---------- */
-.p-footer { position: relative; background: var(--carbon) url("img/texture-carbone.webp") center / 420px; border-top-color: rgba(244, 245, 247, .08); }
-.p-footer::before { content: ""; position: absolute; inset: 0; background: rgba(7, 8, 10, .8); }
+.p-footer { position: relative; background: var(--carbon-weave); border-top-color: rgba(244, 245, 247, .08); }
+.p-footer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 8, 10, .55), rgba(7, 8, 10, .82)); }
 .p-footer > * { position: relative; }
 .p-signature { margin: 0; padding-top: clamp(40px, 6vw, 72px); font-family: var(--font-display); font-weight: 900; font-size: clamp(4rem, 13vw, 12rem); line-height: .85; letter-spacing: -.03em; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1.5px rgba(244, 245, 247, .16); white-space: nowrap; overflow: hidden; }
 
@@ -2186,7 +2196,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
 .phone-aside .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-2); }
 .phone-aside .eyebrow::before { content: ""; width: 32px; height: 2px; background: var(--brand); }
 .phone-stage:not(.is-desktop) { background: radial-gradient(40% 60% at 70% 50%, rgba(225, 29, 38, .14), transparent 70%); }
-.g-d-side { background: linear-gradient(rgba(10, 12, 15, .9), rgba(10, 12, 15, .9)), var(--carbon) url("img/texture-carbone.webp") center / 360px; }
+.g-d-side { background: linear-gradient(rgba(10, 12, 15, .78), rgba(10, 12, 15, .78)), var(--carbon-weave); }
 
 </style>
 
@@ -3500,21 +3510,9 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
   function pageHome() {
     const avail = available().sort(byRecent);
     const n = avail.length;
-    const featured = avail.filter((v) => v.featured && hasPhoto(v))[0] || avail.filter((v) => v.featured)[0] || avail[0];
     const warranty = maxWarranty();
     const makeOpts = makesOf(avail).map((m) => [m, m + ' (' + avail.filter((v) => v.make === m).length + ')']);
     const bodies = LISTS.bodies.filter(([k]) => avail.some((v) => v.body === k));
-
-    const featuredHtml = featured ? '' +
-      '<a class="p-hx-featured" href="' + vehicleHref(featured) + '">' +
-        '<span class="p-hx-featured-img p-visual">' + Media.photo(featured, 0, '') + '</span>' +
-        '<span class="p-hx-featured-txt">' +
-          '<span class="p-label p-dot-red">À la une</span>' +
-          '<span class="p-hx-featured-t">' + esc(fmt.title(featured)) + '</span>' +
-          '<span class="p-hx-featured-s num">' + esc(featured.year) + ' · ' + esc(fmt.km(featured.km)) + ' · ' + esc(featured.fuel) + '</span>' +
-          '<span class="p-hx-featured-p num">' + esc(fmt.price(featured.price)) + '</span>' +
-        '</span>' +
-      '</a>' : '';
 
     const html = '' +
       '<section class="p-hx" aria-labelledby="p-h1">' +
@@ -3526,7 +3524,6 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
               '<p class="p-hx-lead">Achat, vente, réparation, reprogrammation et dépannage. Chaque véhicule passe par notre atelier avant d’entrer dans le showroom.</p>' +
               '<p class="p-hx-ctas"><a class="btn btn-primary" href="#showroom">Voir les ' + plural(n, 'véhicule', 'véhicules') + ' ' + arrowIcon() + '</a><a class="btn btn-glass" href="#garage">Découvrir l’atelier ' + arrowIcon() + '</a></p>' +
             '</div>' +
-            featuredHtml +
           '</div>' +
           '<form class="p-hx-search" id="p-quick" role="search" aria-label="Recherche rapide" novalidate>' +
             selectField('q-make', 'make', 'Marque', makeOpts, '', 'Toutes les marques') +
@@ -3603,22 +3600,23 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
     const bar = root.querySelector('.p-reel-bar i');
     const cur = root.querySelector('.p-reel-cur');
     const tot = root.querySelector('.p-reel-tot');
-    // Les REEL_LIMIT dernières entrées : la plus récente au centre
+    // Les REEL_LIMIT dernières entrées, en boucle infinie : la plus récente au centre,
+    // la flèche de droite va vers les plus anciennes puis revient à la première.
     let list = [];
-    let pos = 0;
+    let pos = 0;          // position continue (peut dépasser la liste : on travaille modulo n)
     let lastId = null;
-
-    function order(src) {
-      const sorted = src.slice().sort(byRecent).slice(0, REEL_LIMIT);
-      // Répartit en éventail autour du centre : 1er au centre, puis alternance droite / gauche
-      const out = [];
-      sorted.forEach((v, i) => { if (i % 2) out.push(v); else out.unshift(v); });
-      return { list: out, center: sorted[0] };
+    const mod = (a, n) => ((a % n) + n) % n;
+    // Écart le plus court entre la carte i et la position courante, dans la boucle
+    function offsetOf(i) {
+      const n = list.length;
+      if (n < 2) return i - pos;
+      let o = mod(i - pos, n);
+      if (o > n / 2) o -= n;
+      return o;
     }
     function setList(src) {
-      const fan = order(src);
-      list = fan.list;
-      pos = Math.max(0, list.indexOf(fan.center));
+      list = src.slice().sort(byRecent).slice(0, REEL_LIMIT);
+      pos = 0;
       lastId = null;
       slidesEl.innerHTML = list.map((v, i) => {
         const tag = v.status === 'reserve' ? '<span class="pill pill-reserve">Réservé</span>' : isNew(v) ? '<span class="p-tag-red">Nouveau</span>' : '';
@@ -3635,8 +3633,13 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
     function metrics() { const s = slidesEl.querySelector('.p-reel-slide'); const w = s ? s.offsetWidth : 560; return { x1: w * 0.84, x2: w * 0.6 }; }
     function layout() {
       const m = metrics();
+      const n = list.length;
       Array.prototype.forEach.call(slidesEl.children, (el, i) => {
-        const o = i - pos, a = Math.abs(o), s = Math.sign(o);
+        const o = offsetOf(i), a = Math.abs(o), s = Math.sign(o);
+        // Une carte qui passe d'un bout à l'autre de la boucle saute sans animation
+        const jump = el.dataset.o !== undefined && Math.abs(o - Number(el.dataset.o)) > n / 2;
+        el.dataset.o = String(o);
+        if (jump) el.style.transition = 'none';
         const a1 = Math.min(a, 1), a2 = Math.max(0, Math.min(a, 2) - 1), a3 = Math.max(0, a - 2);
         const x = s * (a1 * m.x1 + a2 * m.x2 + a3 * m.x2 * 0.6);
         const ry = -s * (a1 * 38 + a2 * 14);
@@ -3647,16 +3650,17 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
         el.style.visibility = a > 2.6 ? 'hidden' : 'visible';
         el.classList.toggle('is-active', a < 0.5);
         el.tabIndex = a < 0.5 ? 0 : -1;
+        if (jump) { void el.offsetWidth; el.style.transition = ''; }
       });
-      const n = list.length, idx = Math.round(pos);
-      prev.disabled = idx <= 0; next.disabled = idx >= n - 1;
+      const idx = n ? mod(Math.round(pos), n) : 0;
+      prev.disabled = next.disabled = n < 2;
       bar.style.width = n ? (100 / n) + '%' : '0';
-      bar.style.left = n ? (Math.max(0, Math.min(n - 1, pos)) * 100 / n) + '%' : '0';
-      cur.textContent = String(Math.min(n, idx + 1)).padStart(2, '0');
+      bar.style.left = n ? (idx * 100 / n) + '%' : '0';
+      cur.textContent = String(n ? idx + 1 : 0).padStart(2, '0');
       renderActive();
     }
     function renderActive() {
-      const v = list[Math.round(pos)];
+      const v = list.length ? list[mod(Math.round(pos), list.length)] : null;
       if (!v || v.id === lastId) return;
       lastId = v.id;
       const chips = [v.year, fmt.km(v.km), v.fuel, v.gearbox, v.hp + ' ch', String(v.critair).toUpperCase() === 'E' ? 'Crit’Air E' : 'Crit’Air ' + v.critair]
@@ -3670,7 +3674,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
           '<a class="btn btn-primary" href="' + vehicleHref(v) + '">Voir la fiche ' + arrowIcon() + '</a></div>' +
       '</div>';
     }
-    function goTo(i) { pos = Math.max(0, Math.min(list.length - 1, i)); layout(); }
+    function goTo(target) { if (!list.length) return; pos = target; layout(); }
     prev.addEventListener('click', () => goTo(Math.round(pos) - 1));
     next.addEventListener('click', () => goTo(Math.round(pos) + 1));
     stage.addEventListener('keydown', (e) => {
@@ -3699,11 +3703,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
         try { stage.setPointerCapture(e.pointerId); } catch (err) { /* rien */ }
       }
       if (!drag.moved) return;
-      let p = drag.pos - dx / (metrics().x1 * 0.9);
-      const max = list.length - 1;
-      if (p < 0) p *= 0.3;
-      if (p > max) p = max + (p - max) * 0.3;
-      pos = p; layout();
+      pos = drag.pos - dx / (metrics().x1 * 0.9); layout();
     });
     const end = (e) => {
       if (!drag || e.pointerId !== drag.id) return;
@@ -3717,8 +3717,8 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
       const s = e.target.closest('.p-reel-slide');
       if (!s) return;
       if (suppress) { e.preventDefault(); return; }
-      const i = Number(s.dataset.i);
-      if (i !== Math.round(pos)) { e.preventDefault(); goTo(i); }
+      const o = Math.round(offsetOf(Number(s.dataset.i)));
+      if (o !== 0) { e.preventDefault(); goTo(Math.round(pos) + o); }
     });
     on(window, 'resize', layout);
     setList(all);
