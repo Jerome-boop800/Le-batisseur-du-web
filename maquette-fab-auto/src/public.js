@@ -306,7 +306,7 @@
       '</div></section>';
   }
 
-  /* Rangée d'étoiles en or, taillées en facettes comme un bijou, avec épaisseur et éclat.
+  /* Rangée d'étoiles en or, taillées en facettes comme un bijou, avec épaisseur et reflet.
      La géométrie (10 facettes éclairées depuis le haut à gauche) est calculée une seule fois. */
   const GOLD_STAR = (function () {
     const cx = 12, cy = 12.2, R = 10.6, r = 4.5, pts = [];
@@ -331,7 +331,6 @@
       facets +
       '<path d="' + outline + '" fill="none" stroke="#fff3c4" stroke-opacity=".7" stroke-width=".45" stroke-linejoin="round"/>' +
       '<ellipse cx="9" cy="8.2" rx="2.6" ry="1.2" fill="#fff" opacity=".55" transform="rotate(-35 9 8.2)"/>' +   // reflet
-      '<path class="p-star-glint" d="M17.5 3.2l.55 1.45 1.45.55-1.45.55-.55 1.45-.55-1.45-1.45-.55 1.45-.55z" fill="#fff"/>' +
       '</svg>';
   })();
   function chromeStars(n) {

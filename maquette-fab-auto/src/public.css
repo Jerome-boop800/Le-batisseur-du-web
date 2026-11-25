@@ -951,19 +951,17 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 
 /* =========================================================
    Étoiles en or façon bijou (atelier) : facettes en relief, tranche dorée,
-   reflet, éclat qui scintille et halo or qui passe d'une étoile à l'autre.
+   reflet et halo or qui passe d'une étoile à l'autre.
    ========================================================= */
 .p-stars { display: inline-flex; align-items: center; gap: 8px; }
 .p-star { width: 24px; height: 26px; overflow: visible; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 4px rgba(255, 196, 60, .35)); animation: p-star-shine 3.2s ease-in-out infinite; }
-.p-star-glint { transform-origin: 17.5px 5.2px; animation: p-star-glint 3.2s ease-in-out infinite; }
-.p-star:nth-child(2), .p-star:nth-child(2) .p-star-glint { animation-delay: .22s; }
-.p-star:nth-child(3), .p-star:nth-child(3) .p-star-glint { animation-delay: .44s; }
-.p-star:nth-child(4), .p-star:nth-child(4) .p-star-glint { animation-delay: .66s; }
-.p-star:nth-child(5), .p-star:nth-child(5) .p-star-glint { animation-delay: .88s; }
+.p-star:nth-child(2) { animation-delay: .22s; }
+.p-star:nth-child(3) { animation-delay: .44s; }
+.p-star:nth-child(4) { animation-delay: .66s; }
+.p-star:nth-child(5) { animation-delay: .88s; }
 @keyframes p-star-shine {
   0%, 100% { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 4px rgba(255, 196, 60, .35)); }
   40% { filter: brightness(1.25) drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 10px rgba(255, 205, 80, .95)); }
 }
-@keyframes p-star-glint { 0%, 25%, 60%, 100% { opacity: 0; transform: scale(.4); } 40% { opacity: 1; transform: scale(1.6); } }
 .p-services-head .p-star { width: 22px; height: 24px; }
-@media (prefers-reduced-motion: reduce) { .p-star, .p-star-glint { animation: none; } .p-star-glint { opacity: .8; } }
+@media (prefers-reduced-motion: reduce) { .p-star { animation: none; } }
