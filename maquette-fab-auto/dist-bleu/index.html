@@ -3568,7 +3568,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
   }
 
   /* Affiche « atelier » jaune et noir (accueil et page garage) */
-  function atelierPoster(level, withCta) {
+  function atelierPoster(level) {
     const h = level === 1 ? 'h1 id="p-h1" tabindex="-1"' : 'h2 id="p-atelier-title"';
     const hc = level === 1 ? 'h1' : 'h2';
     const poster = '' +
@@ -3579,7 +3579,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
           '<' + h + ' class="p-poster-title">Prenez soin<br>de votre<br><em>drive.</em></' + hc + '>' +
           '<p class="p-poster-lead">Entretien, réparation, reprogrammation et dépannage, toutes marques. Un seul interlocuteur, un atelier équipé, et des explications claires avant chaque intervention.</p>' +
           '<div class="p-poster-call">' +
-            (withCta ? '<a class="btn btn-yellow" href="#garage">Découvrir l’atelier ' + arrowIcon() + '</a>' : '<a class="btn btn-yellow" href="#contact">Demander un devis ' + arrowIcon() + '</a>') +
+            '<a class="btn btn-yellow" href="#contact" data-devis="atelier">Demander un devis ' + arrowIcon() + '</a>' +
             '<p class="p-call-num"><span class="p-call-ic">' + icon('phone') + '</span><span><span class="p-label">Plus d’informations</span><span class="p-call-big num">' + esc(GARAGE.phone) + '</span></span></p>' +
           '</div>' +
         '</div>' +
@@ -3723,7 +3723,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
         '</div>' +
       '</section>' +
 
-      '<section class="p-atelier" aria-labelledby="p-atelier-title">' + hazard() + atelierPoster(2, true) + hexServices(2) + hazard() + '</section>' +
+      '<section class="p-atelier" aria-labelledby="p-atelier-title">' + hazard() + atelierPoster(2) + hexServices(2) + hazard() + '</section>' +
 
       '<section class="p-section p-infos" aria-labelledby="p-info-title">' +
         '<div class="p-wrap">' +
@@ -4387,7 +4387,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
       ['Livraison révisée', 'Révision, contrôle technique à jour, carte grise faite : vous repartez l’esprit tranquille.']
     ];
     const html = '' +
-      '<section class="p-atelier p-atelier-page" aria-labelledby="p-h1">' + hazard() + atelierPoster(1, false) + '</section>' +
+      '<section class="p-atelier p-atelier-page" aria-labelledby="p-h1">' + hazard() + atelierPoster(1) + '</section>' +
       '<section class="p-strip" aria-label="Le garage en chiffres"><div class="p-wrap p-strip-grid p-strip-3">' +
         '<div class="p-promise"><p><span class="p-promise-big num">4</span> <span class="p-promise-small">métiers</span></p><p class="p-promise-txt">Sous le même toit, à ' + esc(city) + '</p></div>' +
         '<div class="p-promise"><p><span class="p-promise-big num">' + n + '</span> <span class="p-promise-small">' + (n > 1 ? 'véhicules en stock' : 'véhicule en stock') + '</span></p><p class="p-promise-txt">Révisés par notre atelier</p></div>' +
@@ -4398,7 +4398,7 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
         '<div class="p-wrap p-focus-grid">' +
           focusCard('p-reprog', 'img/reprogrammation.webp', 'Ordinateur branché sur la prise diagnostic d’une voiture, courbes moteur à l’écran', 'Performance &amp; économie', 'Reprogrammation moteur',
             ['Diagnostic électronique complet', 'Lecture du calculateur', 'Cartographie optimisée sur mesure', 'Essai routier et contrôle final'],
-            '<a class="btn btn-yellow" href="#contact">Étudier mon véhicule ' + arrowIcon() + '</a>') +
+            '<a class="btn btn-yellow" href="#contact" data-devis="reprog">Étudier mon véhicule ' + arrowIcon() + '</a>') +
           focusCard('p-depannage', 'img/depannage.webp', 'Dépanneuse plateau transportant une voiture de nuit sous la pluie', 'Panne · Accident · Batterie', 'Dépannage &amp; remorquage',
             ['Intervention autour de ' + esc(city), 'Remorquage jusqu’à l’atelier', 'Diagnostic dès l’arrivée', 'Devis avant toute réparation'],
             '<a class="btn btn-yellow" href="' + telHref(GARAGE.phone) + '">' + icon('phone') + 'Appeler le <span class="num">' + esc(GARAGE.phone) + '</span></a>') +
@@ -4563,6 +4563,15 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
     root.querySelector('.p-skip').addEventListener('click', () => {
       const h = root.querySelector('#p-h1');
       if (h) { h.focus(); h.scrollIntoView({ block: 'start' }); }
+    });
+
+    // Demandes atelier : la page Contact s'ouvre avec l'objet et un début de message
+    root.addEventListener('click', (e) => {
+      const d = e.target.closest('[data-devis]');
+      if (!d) return;
+      contactPrefill = d.dataset.devis === 'reprog'
+        ? { subject: 'atelier', message: 'Bonjour, je souhaite étudier une reprogrammation moteur.\nMarque, modèle et motorisation : \nKilométrage : ' }
+        : { subject: 'atelier', message: 'Bonjour, je souhaite un devis pour mon véhicule.\nMarque et modèle : \nKilométrage : \nTravaux souhaités : ' };
     });
 
     // Boutons « aller à » (formulaire, similaires) : défilement + focus
