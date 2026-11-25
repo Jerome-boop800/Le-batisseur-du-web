@@ -1,0 +1,56 @@
+/* =========================================================
+   Thème « Bleu clair » (validé le 25/11/2026)
+   Ajouté après les autres feuilles par : python3 build.py --theme=bleu
+   - showroom clair (photo img/hero-showroom-clair.webp), voiture blanche ;
+   - tout le rouge passe en bleu, SAUF le logo du client (« AUTO » reste rouge) ;
+   - accents bleu électrique (traits, anneau du carrousel, bandeau des engagements).
+   ========================================================= */
+:root { --electric: #1fb6ff; --electric-2: #7ae3ff; --electric-glow: rgba(31, 182, 255, .55); }
+.p-eyebrow-line::before { background: linear-gradient(90deg, var(--electric), var(--electric-2)); }
+.p-strip::before { background: linear-gradient(100deg, rgba(7, 8, 10, .8), rgba(9, 34, 64, .74) 55%, rgba(7, 8, 10, .72)); }
+.p-promise { border-top: 2px solid transparent; border-image: linear-gradient(90deg, var(--electric), var(--electric-2) 55%, transparent) 1; }
+.p-promise-big { color: #fff; text-shadow: 0 0 18px rgba(31, 182, 255, .35); }
+.p-reel { background: radial-gradient(60% 45% at 50% 58%, rgba(31, 182, 255, .24), transparent 70%), radial-gradient(35% 30% at 85% 15%, rgba(225, 29, 38, .14), transparent 70%), linear-gradient(180deg, #0a1424, #07080a 85%); }
+.p-reel-orbit { border-color: var(--electric); box-shadow: 0 0 18px var(--electric-glow), 0 0 60px rgba(31, 182, 255, .3), inset 0 0 18px rgba(31, 182, 255, .3); }
+.p-reel-orbit::after { border-color: rgba(122, 227, 255, .25); }
+.p-reel-ref { color: var(--electric); }
+.p-reel-bar i { background: linear-gradient(90deg, var(--electric), var(--brand)); }
+.p-reel-filter[aria-pressed="true"] { background: var(--electric); border-color: var(--electric); color: #04121e; }
+.p-reel-filter[aria-pressed="true"] .num { color: #0a3a5a; }
+.p-reel-slide.is-active { border-color: rgba(122, 227, 255, .55); box-shadow: 0 40px 60px -10px rgba(0, 0, 0, .65), 0 0 40px rgba(31, 182, 255, .25); }
+.p-hx-360-dot { background: var(--electric); box-shadow: 0 0 24px var(--electric-glow); }
+.p-dot-red::before { background: var(--electric); box-shadow: 0 0 10px var(--electric); }
+
+/* Variante A : showroom clair, voiture blanche, texte sombre */
+.p-hx { background-image: url("img/hero-showroom-clair.webp"); background-position: 58% 50%; background-color: #eef1f5; }
+.p-hx::before { background: linear-gradient(90deg, rgba(244, 246, 249, .95) 0%, rgba(244, 246, 249, .78) 36%, rgba(244, 246, 249, 0) 62%); }
+.p-hx .p-hx-title { color: #0b0d10; }
+.p-hx .p-outline { color: transparent; -webkit-text-stroke-color: #0b0d10; }
+.p-hx .p-hx-lead, .p-hx .p-eyebrow-line { color: #3a414b; }
+.p-hx .btn-glass { background: rgba(11, 13, 16, .05); border-color: rgba(11, 13, 16, .28); color: #0b0d10; }
+.p-hx-featured { background: rgba(255, 255, 255, .72); border-color: rgba(11, 13, 16, .1); color: #0b0d10; box-shadow: 0 20px 40px -20px rgba(9, 34, 64, .35); }
+.p-hx-featured .p-dot-red { color: #3a414b; }
+.p-hx-featured-s { color: #5b636e; }
+.p-hx-search { background: rgba(255, 255, 255, .84); border-color: rgba(11, 13, 16, .1); box-shadow: 0 24px 50px -24px rgba(9, 34, 64, .45); }
+.p-hx-search .p-field { border-color: rgba(11, 13, 16, .09); }
+.p-hx-search .p-field > label { color: #6b7380; }
+.p-hx-search .select { color: #0b0d10; }
+.p-hx-search .select option { background: #fff; color: #0b0d10; }
+.p-hx-search .p-field::after { border-color: #6b7380; }
+.p-hx-search .p-field:focus-within { background: rgba(31, 182, 255, .08); }
+.p-hx-360 { background: rgba(255, 255, 255, .7); border-color: rgba(11, 13, 16, .12); color: #0b0d10; }
+.p-hx-360 span span { color: #3a414b; }
+@media (max-width: 959px) {
+  .p-hx { background-color: #eef1f5; background-position: 70% 0; }
+  .p-hx::before { background: linear-gradient(180deg, rgba(238, 241, 245, 0) 200px, #eef1f5 360px); }
+}
+
+/* Thème « Bleu clair » : tout le rouge passe en bleu, sauf le logo du client */
+:root { --brand: #1673ff; --brand-ink: #ffffff; --brand-soft: #0c2140; }
+.brand-word-b { color: #e11d26; }   /* logo Fab Auto : inchangé */
+.p-page-head::before { background: radial-gradient(50% 80% at 20% 30%, rgba(31, 182, 255, .16), transparent 70%); }
+.phone-stage:not(.is-desktop) { background: radial-gradient(40% 60% at 70% 50%, rgba(31, 182, 255, .16), transparent 70%); }
+.p-reel { background: radial-gradient(60% 45% at 50% 58%, rgba(31, 182, 255, .24), transparent 70%), radial-gradient(35% 30% at 85% 15%, rgba(122, 227, 255, .12), transparent 70%), linear-gradient(180deg, #0a1424, #07080a 85%); }
+.p-reel-bar i { background: linear-gradient(90deg, var(--electric), var(--brand)); }
+.p-hx-360-dot { box-shadow: 0 0 24px var(--electric-glow); }
+.p-site .btn-primary { box-shadow: 0 10px 24px -10px rgba(22, 115, 255, .7); }

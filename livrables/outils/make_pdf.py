@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Compose le PDF de présentation de la maquette Fab Auto à partir des captures.
 
-Usage : python3 make_pdf.py <dossier_captures> <pdf_sortie>
-Le dossier doit contenir les captures (d-*.jpg, m-*.jpg, g-*.jpg) et img/hero-showroom.webp.
+Usage : python3 make_pdf.py <dossier_captures> <pdf_sortie> [rouge|bleu]
+Le dossier doit contenir les captures (d-*.jpg, m-*.jpg, g-*.jpg) et la photo du hero dans img/.
 """
 import io
 import os
@@ -14,8 +14,14 @@ from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
 
 SRC, OUT = sys.argv[1], sys.argv[2]
-URL = 'https://claude.ai/artifact/PpZcfXRtcgs2CZyrDx8d7N'
-BG = HexColor('#0b0d10'); INK = HexColor('#f4f5f7'); INK2 = HexColor('#b9bfc8'); INK3 = HexColor('#868e9a'); RED = HexColor('#e11d26')
+THEME = sys.argv[3] if len(sys.argv) > 3 else 'rouge'
+THEMES = {
+    'rouge': ('https://claude.ai/artifact/PpZcfXRtcgs2CZyrDx8d7N', '#e11d26', 'img/hero-showroom.webp', 'Version noir et rouge'),
+    'bleu': ('https://claude.ai/artifact/3Tu7RCXkwLSgm1EYg4UJsy', '#1673ff', 'img/hero-showroom-clair.webp', 'Version bleu clair'),
+}
+URL, ACCENT, HERO, VERSION = THEMES[THEME]
+BG = HexColor('#0b0d10'); INK = HexColor('#f4f5f7'); INK2 = HexColor('#b9bfc8'); INK3 = HexColor('#868e9a'); RED = HexColor(ACCENT)
+LOGO_RED = HexColor('#e11d26')   # « AUTO » du logo : toujours rouge
 W = 842; M = 36; CW = W - 2 * M; HEAD = 92
 PHONE_CROP = (880, 25, 1410, 1030)   # cadre du téléphone dans la capture 1440×900 à ×1,25
 
@@ -51,16 +57,16 @@ def footer():
 
 # ---------- Couverture ----------
 H = 595; c.setPageSize((W, H))
-hero = Image.open(path('img/hero-showroom.webp')).convert('RGB')
+hero = Image.open(path(HERO)).convert('RGB')
 r = max(W / hero.width, H / hero.height)
 hero = hero.resize((int(hero.width * r), int(hero.height * r)))
 c.drawImage(jpg(hero), 0, 0, width=hero.width, height=hero.height)
-c.setFillColor(Color(0.027, 0.031, 0.039, alpha=0.78)); c.rect(0, 0, W * 0.62, H, fill=1, stroke=0)
+c.setFillColor(Color(0.027, 0.031, 0.039, alpha=0.82)); c.rect(0, 0, W * 0.62, H, fill=1, stroke=0)
 c.setFillColor(Color(0.027, 0.031, 0.039, alpha=0.35)); c.rect(W * 0.62, 0, W * 0.38, H, fill=1, stroke=0)
 c.setFillColor(RED); c.rect(M, H - 70, 30, 2, fill=1, stroke=0)
-c.setFillColor(INK2); c.setFont('Helvetica-Bold', 10); c.drawString(M + 40, H - 73, 'PRÉSENTATION DE LA MAQUETTE · NOVEMBRE 2026')
+c.setFillColor(INK2); c.setFont('Helvetica-Bold', 10); c.drawString(M + 40, H - 73, 'PRÉSENTATION DE LA MAQUETTE · ' + VERSION.upper() + ' · NOVEMBRE 2026')
 c.setFillColor(INK); c.setFont('Helvetica', 46); c.drawString(M, H - 150, 'FAB')
-c.setFillColor(RED); c.setFont('Helvetica-Bold', 46); c.drawString(M + 100, H - 150, 'AUTO')
+c.setFillColor(LOGO_RED); c.setFont('Helvetica-Bold', 46); c.drawString(M + 100, H - 150, 'AUTO')
 c.setFillColor(INK); c.setFont('Helvetica-Bold', 20); c.drawString(M, H - 190, 'Votre futur site : showroom et espace gérant')
 c.setFillColor(INK2); c.setFont('Helvetica', 11.5)
 for i, line in enumerate(['Un site pensé comme un showroom : vos véhicules mis en valeur,',
@@ -94,7 +100,7 @@ def tall(fname, kicker, title, note):
 tall('d-accueil.jpg', '1 · Site client · ordinateur', 'Accueil', 'Hero showroom, carrousel des dernières voitures rentrées, atelier')
 tall('d-showroom.jpg', '2 · Site client · ordinateur', 'Showroom : tout le stock', '7 filtres, tri, mise à jour en temps réel par le gérant')
 tall('d-vehicule.jpg', '3 · Site client · ordinateur', 'Fiche véhicule', 'Photos, caractéristiques, garantie, formulaire « Ce véhicule m’intéresse »')
-tall('d-atelier.jpg', '4 · Site client · ordinateur', 'Atelier', 'Réparation, reprogrammation, dépannage, achat en 4 étapes')
+tall('d-atelier.jpg', '4 · Site client · ordinateur', 'Atelier', 'La porte de garage s’ouvre, puis réparation, reprogrammation, dépannage')
 
 # ---------- Site sur téléphone ----------
 m = Image.open(path('m-accueil.jpg')); v = Image.open(path('m-vehicule.jpg'))

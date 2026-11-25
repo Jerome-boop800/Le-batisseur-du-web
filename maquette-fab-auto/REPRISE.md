@@ -17,7 +17,8 @@ Fichier mis à jour le 24 novembre 2026 (passage au thème « Carbon Showroom »
 | **Étape actuelle** | Maquette envoyée au garagiste pour validation. **Pas encore de développement serveur.** |
 
 **Liens**
-- **Maquette en ligne, thème Carbon (actuelle) :** https://claude.ai/artifact/PpZcfXRtcgs2CZyrDx8d7N (privée tant qu'elle n'est pas partagée par le menu « Partager »)
+- **Maquette en ligne, version noir et rouge :** https://claude.ai/artifact/PpZcfXRtcgs2CZyrDx8d7N (partagée : toute personne disposant du lien)
+- **Maquette en ligne, version Bleu clair :** https://claude.ai/artifact/3Tu7RCXkwLSgm1EYg4UJsy (privée tant qu'elle n'est pas partagée par le menu « Partager »)
 - **Ancienne maquette, thème clair :** https://claude.ai/artifact/1jCByUE98sgHQwdqMCzXGF (non modifiée)
 - **Page de présentation seule (site public) :** https://claude.ai/artifact/NUTatgqYL8ES9TMAmqJGof — sources dans `../maquette-carbon/`
 - **Fichier Figma :** https://www.figma.com/design/kOQSINbT7oOAjGkXbqxftM — notes dans `../figma-fab-auto/REPRISE-FIGMA.md`
@@ -111,6 +112,17 @@ Pour publier, utiliser l'outil Artifact sur `dist/index.html` à l'URL « thème
 - **Photos de démonstration réalistes** sur les 12 véhicules (`img/photo-*.webp`, générées pour imiter des photos prises au téléphone sur le parking du garage). Choix validé avec Colin le 25/11 : **vraies photos partout, y compris dans le carrousel, sans détourage**, pour que les visiteurs voient l'état réel des voitures. Le détourage automatique (fond « showroom ») a été testé et reste une option à chiffrer.
 - Clé de stockage passée à `garage-maquette-v3`.
 - Styles ajoutés en fin de `public.css` et `gerant.css` (section « Thème Carbon Showroom »).
+
+## 3 ter. Porte de garage, atelier acier et version Bleu clair (25/11/2026)
+
+- **Atelier** : plus de jaune. Univers acier brossé + couleur de la version (`--yellow` est redirigé vers `--brand` dans `.p-atelier`), photo `img/atelier-acier.webp`.
+- **Porte de garage** (`atelierPoster` + `bindGarage` dans `public.js`, styles « Atelier acier + porte de garage » dans `public.css`) :
+  - accueil : la porte se lève au défilement ; sur grand écran la scène reste en place (`.p-garage.is-pinned`, `overflow: clip` sur `.p-atelier` pour que `position: sticky` fonctionne) ;
+  - page Atelier : la porte s'ouvre seule à l'arrivée ;
+  - animations réduites : porte masquée.
+- **Version Bleu clair** : `src/theme-bleu.css`, ajouté par `python3 build.py --theme=bleu` (sortie `dist-bleu/`). Showroom clair `img/hero-showroom-clair.webp`, tout le rouge en bleu sauf le logo.
+- **Publication** : `dist/index.html` → lien noir et rouge ; `dist-bleu/index.html` → lien Bleu clair, en passant le dossier `img/` dans `files`.
+- **Livrables** (`../livrables/`) : un PDF de présentation et un fichier hors ligne par version, sources zippées. Régénérer avec `outils/captures.js` puis `outils/make_pdf.py <dossier> <pdf> rouge|bleu`.
 
 ## 4. Contrôles déjà faits (24/11/2026)
 

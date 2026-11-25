@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
 (async () => {
   const dir = process.argv[2]; const b = await chromium.launch(); const errs = [];
-  const hide = '.demo-bar{display:none!important}';
+  const hide = '.demo-bar{display:none!important}.p-door,.p-garage-housing{display:none!important}.p-garage.is-pinned{height:auto!important}.p-garage.is-pinned .p-garage-stage{position:relative!important;height:auto!important;top:auto!important}';
   async function page(vp, scale) { const p = await b.newPage({ viewport: vp, deviceScaleFactor: scale }); p.on('pageerror', e => errs.push(e.message)); await p.goto('file://' + dir + '/index.html#accueil'); await p.waitForTimeout(800); return p; }
   async function settle(p) { await p.evaluate(async () => { document.querySelectorAll('img[loading=lazy]').forEach(i => i.loading = 'eager'); for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); } window.scrollTo(0, 0); }); await p.waitForTimeout(1800); }
   // Site public, ordinateur

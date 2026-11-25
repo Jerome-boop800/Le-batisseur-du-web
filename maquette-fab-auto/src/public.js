@@ -310,7 +310,7 @@
   function atelierPoster(level, withCta) {
     const h = level === 1 ? 'h1 id="p-h1" tabindex="-1"' : 'h2 id="p-atelier-title"';
     const hc = level === 1 ? 'h1' : 'h2';
-    return '' +
+    const poster = '' +
       '<div class="p-wrap p-poster">' +
         '<div class="p-poster-copy">' +
           '<span class="p-badge-y">L’atelier ' + esc(GARAGE.name) + '</span>' +
@@ -323,10 +323,55 @@
           '</div>' +
         '</div>' +
         '<div class="p-poster-visual">' +
-          '<img src="img/atelier-pont.webp" alt="Mécanicien contrôlant une voiture sur un pont élévateur dans l’atelier" width="1024" height="1024" decoding="async">' +
+          '<img src="img/atelier-acier.webp" alt="Mécanicien contrôlant une voiture sur un pont élévateur dans l’atelier" width="1024" height="1024" decoding="async">' +
           '<span class="p-poster-vtext" aria-hidden="true">' + esc(GARAGE.name) + ' · Atelier</span>' +
         '</div>' +
       '</div>';
+    // Porte de garage à lames : elle se lève au défilement (accueil) ou toute seule (page Atelier)
+    return '' +
+      '<div class="p-garage" data-garage="' + (level === 1 ? 'auto' : 'scroll') + '">' +
+        '<div class="p-garage-stage">' + poster +
+          '<span class="p-garage-housing" aria-hidden="true"></span>' +
+          '<div class="p-door" aria-hidden="true">' +
+            '<span class="p-door-plate">' + App.Brand.mark('p-door-mark') + '<span><b>' + esc(GARAGE.name) + '</b><small>Atelier mécanique</small></span></span>' +
+            '<span class="p-door-hint">' + (level === 1 ? 'Ouverture de l’atelier' : 'Faites défiler pour ouvrir l’atelier') + '</span>' +
+            '<span class="p-door-handle"></span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  /* Ouverture de la porte : liée au défilement, ou automatique à l'arrivée sur la page Atelier */
+  function bindGarage(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('.p-garage'), (g) => {
+      const door = g.querySelector('.p-door');
+      const stage = g.querySelector('.p-garage-stage');
+      if (reducedMotion()) { g.classList.add('is-open'); return; }
+      if (g.dataset.garage === 'auto') { setTimeout(() => g.classList.add('is-open'), 450); return; }
+      const mq = window.matchMedia('(min-width: 960px) and (min-height: 700px)');
+      let raf = 0;
+      const update = () => {
+        raf = 0;
+        const r = g.getBoundingClientRect();
+        const vh = window.innerHeight;
+        let p;
+        if (g.classList.contains('is-pinned')) {
+          // La scène reste en place pendant que la porte se lève
+          const top = parseFloat(getComputedStyle(stage).top) || 0;
+          p = (top - r.top + vh * 0.12) / Math.max(1, (g.offsetHeight - stage.offsetHeight) * 0.85);
+        } else {
+          p = (vh * 0.8 - r.top) / (vh * 0.65);
+        }
+        p = Math.max(0, Math.min(1, p));
+        door.style.transform = 'translateY(' + (-p * 103).toFixed(2) + '%)';
+        door.style.opacity = (0.86 - p * 0.3).toFixed(3);
+        g.classList.toggle('is-open', p >= 1);
+      };
+      const setPin = () => { g.classList.toggle('is-pinned', mq.matches); update(); };
+      on(window, 'scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      on(window, 'resize', setPin);
+      setPin();
+    });
   }
 
   /* Services en hexagones */
@@ -454,6 +499,7 @@
         });
         form.addEventListener('submit', (e) => { e.preventDefault(); filters = read(); Router.go('showroom'); });
         bindReel(root, avail);
+        bindGarage(root);
       }
     };
   }
@@ -1119,7 +1165,8 @@
     return {
       title: 'L’atelier — ' + GARAGE.name + ', ' + city,
       description: GARAGE.name + ' à ' + city + ' : achat et vente de véhicules d’occasion, réparation, reprogrammation et dépannage.',
-      html: html
+      html: html,
+      bind: bindGarage
     };
   }
 
