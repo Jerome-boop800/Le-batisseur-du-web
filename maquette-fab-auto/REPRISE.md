@@ -108,7 +108,7 @@ Pour publier, utiliser l'outil Artifact sur `dist/index.html` à l'URL « thème
 
 - **Palette unique sombre** dans `tokens.css` : carbone, chrome, rouge Fab Auto (`--brand`), jaune atelier (`--yellow`). Le site et l'espace gérant en héritent.
 - **Accueil réécrit** (`public.js`, `pageHome`) : hero showroom photo, carte « À la une », recherche rapide (marque, budget, énergie, carrosserie), bandeau d'engagements sur texture carbone, **carrousel 3D** des véhicules (`bindReel` : glisser, flèches, clavier, filtres par carrosserie), univers atelier jaune/noir, infos pratiques.
-- **Page « Atelier »** (`pageGarage`) : affiche « Prenez soin de votre drive. », hexagones de services, cartes Reprogrammation et Dépannage, achat en 4 étapes.
+- **Page « Atelier »** (`pageGarage`) : affiche « Prenez soin de votre véhicule. », hexagones de services, cartes Reprogrammation et Dépannage, achat en 4 étapes.
 - **Photos de démonstration réalistes** sur les 12 véhicules (`img/photo-*.webp`, générées pour imiter des photos prises au téléphone sur le parking du garage). Choix validé avec Colin le 25/11 : **vraies photos partout, y compris dans le carrousel, sans détourage**, pour que les visiteurs voient l'état réel des voitures. Le détourage automatique (fond « showroom ») a été testé et reste une option à chiffrer.
 - Clé de stockage passée à `garage-maquette-v3`.
 - Styles ajoutés en fin de `public.css` et `gerant.css` (section « Thème Carbon Showroom »).

@@ -948,3 +948,22 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .p-actionbar { padding-top: 6px; }
 @media (max-width: 900px) { .p-site .btn { min-height: 46px; } .p-hx-search .p-quick-submit { margin: 8px 0 4px; } }
 @media (prefers-reduced-motion: reduce) { .p-site .btn { animation: none !important; transition: none; } .p-site .btn::before { animation: none !important; } }
+
+/* =========================================================
+   Étoiles argentées chromées (atelier) : reflet métallique,
+   brillance qui passe d'une étoile à l'autre, éclat qui scintille.
+   ========================================================= */
+.p-stars { display: inline-flex; align-items: center; gap: 8px; }
+.p-star { width: 22px; height: 22px; overflow: visible; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .7)) drop-shadow(0 0 3px rgba(255, 255, 255, .3)); animation: p-star-shine 3.2s ease-in-out infinite; }
+.p-star-glint { transform-origin: 17.5px 5.2px; animation: p-star-glint 3.2s ease-in-out infinite; }
+.p-star:nth-child(2), .p-star:nth-child(2) .p-star-glint { animation-delay: .22s; }
+.p-star:nth-child(3), .p-star:nth-child(3) .p-star-glint { animation-delay: .44s; }
+.p-star:nth-child(4), .p-star:nth-child(4) .p-star-glint { animation-delay: .66s; }
+.p-star:nth-child(5), .p-star:nth-child(5) .p-star-glint { animation-delay: .88s; }
+@keyframes p-star-shine {
+  0%, 100% { filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .7)) drop-shadow(0 0 3px rgba(255, 255, 255, .3)); }
+  40% { filter: brightness(1.3) drop-shadow(0 1px 1px rgba(0, 0, 0, .7)) drop-shadow(0 0 9px rgba(255, 255, 255, .95)); }
+}
+@keyframes p-star-glint { 0%, 25%, 60%, 100% { opacity: 0; transform: scale(.4); } 40% { opacity: 1; transform: scale(1.5); } }
+.p-services-head .p-star { width: 20px; height: 20px; }
+@media (prefers-reduced-motion: reduce) { .p-star, .p-star-glint { animation: none; } .p-star-glint { opacity: .8; } }

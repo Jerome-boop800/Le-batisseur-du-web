@@ -306,6 +306,23 @@
       '</div></section>';
   }
 
+  /* Rangée d'étoiles argentées chromées (décor de l'atelier), avec un éclat qui scintille */
+  let starSeq = 0;
+  function chromeStars(n) {
+    let out = '<span class="p-stars" aria-hidden="true">';
+    for (let i = 0; i < n; i++) {
+      const id = 'p-chrome-' + (++starSeq);
+      out += '<svg class="p-star" viewBox="0 0 24 24" width="22" height="22">' +
+        '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0" stop-color="#ffffff"/><stop offset=".38" stop-color="#d9dee4"/><stop offset=".5" stop-color="#7d8794"/>' +
+          '<stop offset=".62" stop-color="#c3cad3"/><stop offset="1" stop-color="#f4f6f8"/></linearGradient></defs>' +
+        '<path d="M12 1.8l3 6.3 6.9.8-5.1 4.8 1.4 6.9L12 17.2l-6.2 3.4 1.4-6.9-5.1-4.8 6.9-.8z" fill="url(#' + id + ')" stroke="rgba(255,255,255,.75)" stroke-width=".6" stroke-linejoin="round"/>' +
+        '<path class="p-star-glint" d="M17.5 3.2l.55 1.45 1.45.55-1.45.55-.55 1.45-.55-1.45-1.45-.55 1.45-.55z" fill="#fff"/>' +
+        '</svg>';
+    }
+    return out + '</span>';
+  }
+
   /* Affiche « atelier » jaune et noir (accueil et page garage) */
   function atelierPoster(level) {
     const h = level === 1 ? 'h1 id="p-h1" tabindex="-1"' : 'h2 id="p-atelier-title"';
@@ -314,8 +331,8 @@
       '<div class="p-wrap p-poster">' +
         '<div class="p-poster-copy">' +
           '<span class="p-badge-y">L’atelier ' + esc(GARAGE.name) + '</span>' +
-          '<span class="p-plus" aria-hidden="true">+++++</span>' +
-          '<' + h + ' class="p-poster-title">Prenez soin<br>de votre<br><em>drive.</em></' + hc + '>' +
+          chromeStars(5) +
+          '<' + h + ' class="p-poster-title">Prenez soin<br>de votre<br><em>véhicule.</em></' + hc + '>' +
           '<p class="p-poster-lead">Entretien, réparation, reprogrammation et dépannage, toutes marques. Un seul interlocuteur, un atelier équipé, et des explications claires avant chaque intervention.</p>' +
           '<div class="p-poster-call">' +
             '<a class="btn btn-yellow" href="#contact" data-devis="atelier">Demander un devis ' + arrowIcon() + '</a>' +
@@ -385,7 +402,7 @@
     const h = 'h' + (titleLevel || 2);
     return '' +
       '<div class="p-wrap p-services-x">' +
-        '<div class="p-services-head"><span class="p-plus" aria-hidden="true">+++</span><' + h + ' id="p-serv-title">Nos services</' + h + '></div>' +
+        '<div class="p-services-head">' + chromeStars(3) + '<' + h + ' id="p-serv-title">Nos services</' + h + '></div>' +
         '<ul class="p-hexes">' + SERVICES.map(([ic, t, d]) =>
           '<li><span class="p-hex" aria-hidden="true">' + icon(ic) + '</span><h3>' + t + '</h3><p>' + d + '</p></li>').join('') + '</ul>' +
       '</div>';
