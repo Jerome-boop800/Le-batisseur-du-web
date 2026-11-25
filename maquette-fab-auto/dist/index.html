@@ -1113,11 +1113,11 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) { .p-site .btn { animation: none !important; transition: none; } .p-site .btn::before { animation: none !important; } }
 
 /* =========================================================
-   Étoiles en or façon bijou (atelier) : facettes en relief, tranche dorée,
-   reflet et halo or qui passe d'une étoile à l'autre.
+   Étoiles en or poli façon bijou (atelier) : image d'étoile en or,
+   avec un halo or qui passe d'une étoile à l'autre.
    ========================================================= */
-.p-stars { display: inline-flex; align-items: center; gap: 8px; }
-.p-star { width: 24px; height: 26px; overflow: visible; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 4px rgba(255, 196, 60, .35)); animation: p-star-shine 3.2s ease-in-out infinite; }
+.p-stars { display: inline-flex; align-items: center; gap: 6px; }
+.p-star { display: block; width: 30px; height: 30px; object-fit: contain; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 4px rgba(255, 196, 60, .35)); animation: p-star-shine 3.2s ease-in-out infinite; }
 .p-star:nth-child(2) { animation-delay: .22s; }
 .p-star:nth-child(3) { animation-delay: .44s; }
 .p-star:nth-child(4) { animation-delay: .66s; }
@@ -1126,7 +1126,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
   0%, 100% { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 4px rgba(255, 196, 60, .35)); }
   40% { filter: brightness(1.25) drop-shadow(0 2px 2px rgba(0, 0, 0, .65)) drop-shadow(0 0 10px rgba(255, 205, 80, .95)); }
 }
-.p-services-head .p-star { width: 22px; height: 24px; }
+.p-services-head .p-star { width: 26px; height: 26px; }
 @media (prefers-reduced-motion: reduce) { .p-star { animation: none; } }
 
 /* =========================================================
@@ -3529,33 +3529,8 @@ body:has(.g-d-bulk:not([hidden])) .toast-zone { bottom: calc(84px + env(safe-are
       '</div></section>';
   }
 
-  /* Rangée d'étoiles en or, taillées en facettes comme un bijou, avec épaisseur et reflet.
-     La géométrie (10 facettes éclairées depuis le haut à gauche) est calculée une seule fois. */
-  const GOLD_STAR = (function () {
-    const cx = 12, cy = 12.2, R = 10.6, r = 4.5, pts = [];
-    for (let i = 0; i < 10; i++) {
-      const a = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? r : R;
-      pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a)]);
-    }
-    const f = (n) => n.toFixed(2);
-    const outline = 'M' + pts.map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z';
-    const dark = [110, 72, 10], mid = [228, 168, 36], light = [255, 238, 165];
-    const mix = (c1, c2, t) => 'rgb(' + c1.map((v, k) => Math.round(v + (c2[k] - v) * t)).join(',') + ')';
-    const facets = pts.map((p, i) => {
-      const q = pts[(i + 1) % 10];
-      const mx = (p[0] + q[0]) / 2 - cx, my = (p[1] + q[1]) / 2 - cy, l = Math.hypot(mx, my);
-      const t = ((mx / l) * -0.6 + (my / l) * -0.8 + 1) / 2;     // 0 = dans l'ombre, 1 = face à la lumière
-      const col = t < 0.5 ? mix(dark, mid, t * 2) : mix(mid, light, (t - 0.5) * 2);
-      return '<path d="M' + cx + ' ' + cy + 'L' + f(p[0]) + ' ' + f(p[1]) + 'L' + f(q[0]) + ' ' + f(q[1]) + 'Z" fill="' + col + '"/>';
-    }).join('');
-    return '<svg class="p-star" viewBox="0 0 24 26" width="24" height="26">' +
-      '<path d="' + outline + '" transform="translate(0 2)" fill="#4a3005"/>' +          // tranche (épaisseur)
-      '<path d="' + outline + '" transform="translate(0 1)" fill="#8f6411"/>' +
-      facets +
-      '<path d="' + outline + '" fill="none" stroke="#fff3c4" stroke-opacity=".7" stroke-width=".45" stroke-linejoin="round"/>' +
-      '<ellipse cx="9" cy="8.2" rx="2.6" ry="1.2" fill="#fff" opacity=".55" transform="rotate(-35 9 8.2)"/>' +   // reflet
-      '</svg>';
-  })();
+  /* Rangée d'étoiles en or poli, façon bijou : une vraie image d'étoile en or (img/etoile-or.webp). */
+  const GOLD_STAR = '<img class="p-star" src="img/etoile-or.webp" width="30" height="30" alt="" decoding="async">';
   function chromeStars(n) {
     let out = '<span class="p-stars" aria-hidden="true">';
     for (let i = 0; i < n; i++) out += GOLD_STAR;

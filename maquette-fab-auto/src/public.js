@@ -306,33 +306,8 @@
       '</div></section>';
   }
 
-  /* Rangée d'étoiles en or, taillées en facettes comme un bijou, avec épaisseur et reflet.
-     La géométrie (10 facettes éclairées depuis le haut à gauche) est calculée une seule fois. */
-  const GOLD_STAR = (function () {
-    const cx = 12, cy = 12.2, R = 10.6, r = 4.5, pts = [];
-    for (let i = 0; i < 10; i++) {
-      const a = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? r : R;
-      pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a)]);
-    }
-    const f = (n) => n.toFixed(2);
-    const outline = 'M' + pts.map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z';
-    const dark = [110, 72, 10], mid = [228, 168, 36], light = [255, 238, 165];
-    const mix = (c1, c2, t) => 'rgb(' + c1.map((v, k) => Math.round(v + (c2[k] - v) * t)).join(',') + ')';
-    const facets = pts.map((p, i) => {
-      const q = pts[(i + 1) % 10];
-      const mx = (p[0] + q[0]) / 2 - cx, my = (p[1] + q[1]) / 2 - cy, l = Math.hypot(mx, my);
-      const t = ((mx / l) * -0.6 + (my / l) * -0.8 + 1) / 2;     // 0 = dans l'ombre, 1 = face à la lumière
-      const col = t < 0.5 ? mix(dark, mid, t * 2) : mix(mid, light, (t - 0.5) * 2);
-      return '<path d="M' + cx + ' ' + cy + 'L' + f(p[0]) + ' ' + f(p[1]) + 'L' + f(q[0]) + ' ' + f(q[1]) + 'Z" fill="' + col + '"/>';
-    }).join('');
-    return '<svg class="p-star" viewBox="0 0 24 26" width="24" height="26">' +
-      '<path d="' + outline + '" transform="translate(0 2)" fill="#4a3005"/>' +          // tranche (épaisseur)
-      '<path d="' + outline + '" transform="translate(0 1)" fill="#8f6411"/>' +
-      facets +
-      '<path d="' + outline + '" fill="none" stroke="#fff3c4" stroke-opacity=".7" stroke-width=".45" stroke-linejoin="round"/>' +
-      '<ellipse cx="9" cy="8.2" rx="2.6" ry="1.2" fill="#fff" opacity=".55" transform="rotate(-35 9 8.2)"/>' +   // reflet
-      '</svg>';
-  })();
+  /* Rangée d'étoiles en or poli, façon bijou : une vraie image d'étoile en or (img/etoile-or.webp). */
+  const GOLD_STAR = '<img class="p-star" src="img/etoile-or.webp" width="30" height="30" alt="" decoding="async">';
   function chromeStars(n) {
     let out = '<span class="p-stars" aria-hidden="true">';
     for (let i = 0; i < n; i++) out += GOLD_STAR;
