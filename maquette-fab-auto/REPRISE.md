@@ -137,15 +137,15 @@ Pour publier, utiliser l'outil Artifact sur `dist/index.html` à l'URL « thème
 - **Étoiles en or poli façon bijou** : vraie image `img/etoile-or.webp` (96 px, détourée), générée d'après la référence du client. L'original en grand est dans `figma-fab-auto/assets/etoile-or-hd.png`. 5 étoiles sur l'affiche de l'atelier, 5 au-dessus de « Nos services » (`GOLD_STAR` et `chromeStars()` dans `public.js`, halo animé `p-star-shine` dans `public.css`).
 - **Pied de page** : boutons « Appeler » et « Écrire » en `btn-primary` ; signature géante « FAB AUTO » en **liseré seul** de la couleur des boutons (bleu ou rouge selon la version), reflet blanc qui glisse sur le contour (`::after` + masque, `p-sig-shine`), et **lumière qui monte du sol** derrière les lettres avec une fine rampe lumineuse (`::before` + fond de `.p-signature`).
 
-**Fait, montré au client, PAS ENCORE publié** :
-- **Lumière blanche sur le logo** (fin de `public.css`, animation `p-logo-sweep`) : un trait de lumière part du pictogramme, puis passe sur « FAB » puis « AUTO », environ 1 s toutes les 6 s. Le client a dit « ça me plaît bien ». Le code est déjà dans `src/` et dans `dist/` et `dist-bleu/` (reconstruits), mais les deux artefacts en ligne ne l'ont pas encore.
+**Validé et publié le 25/11 en fin d'après-midi** (livrables régénérés) :
+- **Lumière blanche sur le logo** (fin de `public.css`, animation `p-logo-sweep`) : un trait de lumière part du pictogramme, puis passe sur « FAB » puis « AUTO », environ 1 s toutes les 6 s. Validé par le client et en ligne sur les deux maquettes.
 
 **Pour reprendre (dans l'ordre)** :
-1. Demander au client s'il veut ajuster le rythme du reflet du logo (plus lent, plus discret…), sinon le considérer comme validé.
-2. Publier les deux maquettes (même fichier, même lien) :
+1. (Fait le 25/11) Lumière du logo validée.
+2. Pour toute nouvelle modification, publier les deux maquettes (même fichier, même lien) :
    - noir et rouge : `maquette-fab-auto/dist/index.html` → https://claude.ai/artifact/PpZcfXRtcgs2CZyrDx8d7N (public)
    - bleu clair : `maquette-fab-auto/dist-bleu/index.html` → https://claude.ai/artifact/3Tu7RCXkwLSgm1EYg4UJsy (encore **privé** : le client doit le passer en « Toute personne disposant du lien »)
-3. Régénérer les livrables dans `livrables/` : construire les versions autonomes (`python3 build.py <dossier>/index.html --standalone`, et `--theme=bleu`) avec une copie de `dist/img` (ou `dist-bleu/img`) à côté, lancer `node livrables/outils/captures.js <dossier>`, puis `python3 livrables/outils/make_pdf.py <dossier> <pdf> rouge|bleu`, refaire les deux HTML hors ligne (images `img/…` remplacées par des data URI) et le zip `maquette-fab-auto-sources-v5.zip`.
+3. Puis régénérer les livrables dans `livrables/` : construire les versions autonomes (`python3 build.py <dossier>/index.html --standalone`, et `--theme=bleu`) avec une copie de `dist/img` (ou `dist-bleu/img`) à côté, lancer `node livrables/outils/captures.js <dossier>`, puis `python3 livrables/outils/make_pdf.py <dossier> <pdf> rouge|bleu`, refaire les deux HTML hors ligne (images `img/…` remplacées par des data URI) et le zip `maquette-fab-auto-sources-v5.zip`.
 4. Toujours ouvert : le connecteur Google Drive du compte pro est en lecture seule ; il faut le reconnecter avec tous les droits pour déposer les livrables sur le Drive pro et refaire le brouillon de mail dans le Gmail pro.
 
 
