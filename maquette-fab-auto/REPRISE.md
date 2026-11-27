@@ -203,7 +203,20 @@ Choix recommandé et argumenté avec Colin :
   - Table `users`.
 - **SEO :** données structurées `AutoDealer` et `Car` (déjà générées par la maquette), sitemap généré automatiquement, une URL par véhicule (par exemple `/vehicule/peugeot-208-vo-0142`).
 
-## 8. Rappel du devis (proposition PROP-2026-11-001)
+## 8. Devis retenu pour le rendez-vous du 28/11/2026 (DEV-2026-11-001)
+
+Fichier : `livrables/Fab-Auto-devis-DEV-2026-11-001.pdf` (généré par `livrables/outils/make_devis.py`). Une seule formule, **Showroom Pro**, sans options à la carte, au choix :
+
+| | Achat | Location 36 mois |
+|---|---|---|
+| Création / mise en service | 5 775 € HT (30/40/30 %) | 690 € HT |
+| Mensuel | 69 € HT (Forfait Sérénité, 12 mois d'engagement) | 239 € HT tout compris |
+| Total sur 3 ans | 8 259 € HT | 9 294 € HT |
+
+- L'application gérant installable (icône téléphone et PC) est **incluse sans supplément** (geste commercial décidé par Colin).
+- À compléter à la main sur le devis : **SIRET** et **mention de TVA** (lignes laissées en pointillés).
+
+### Ancienne proposition (PROP-2026-11-001, 23/11/2026)
 
 | Formule | Achat | Location 36 mois |
 |---|---|---|
